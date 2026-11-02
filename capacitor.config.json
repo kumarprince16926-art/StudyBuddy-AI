@@ -1,0 +1,8 @@
+{
+  "appId": "com.princekumar.studybuddy",
+  "appName": "StudyBuddy AI",
+  "webDir": "public",
+  "server": {
+    "androidScheme": "https"
+  }
+}
