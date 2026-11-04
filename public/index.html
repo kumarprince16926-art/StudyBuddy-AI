@@ -19,7 +19,14 @@ async function api(path,opts={}){opts.headers={...(opts.headers||{}),...(token?{
 function showPage(p){document.querySelectorAll(".page").forEach(x=>x.classList.add("hidden"));$(p).classList.remove("hidden");if(p==="history")loadHistory();if(p==="admin")loadAdmin()}
 function setMode(m){mode=m;$("nameWrap").classList.toggle("hidden",m!=="register");$("authSubmit").textContent=m==="login"?"Sign in":"Create account";$("loginTab").className=m==="login"?"":"secondary";$("registerTab").className=m==="register"?"":"secondary"}
 $("loginTab").onclick=()=>setMode("login");$("registerTab").onclick=()=>setMode("register");
-$("authSubmit").onclick=async()=>{try{let r=await fetch("/api/"+(mode==="login"?"login":"register"),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:$("name").value,email:$("email").value,password:$("password").value})});let d=await r.json();if(!r.ok)throw Error(d.error);token=d.token;localStorage.setItem("sb_token",token);await boot()}catch(e){$("authMsg").textContent=e.message}};
+$("authSubmit").onclick=async()=>{try{let r=await fetch("/api/"+(mode==="login"?"login":"register"),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:$("name").value,email:$("email").value,password:$("password").value})});let text=await r.text();
+let d;
+try {
+  d=JSON.parse(text);
+} catch {
+  throw Error("Server API route not found. Check Render deployment.");
+}
+if(!r.ok)throw Error(d.error || "Request failed");;token=d.token;localStorage.setItem("sb_token",token);await boot()}catch(e){$("authMsg").textContent=e.message}};
 async function boot(){if(!token)return;try{let r=await api("/api/me");if(!r.ok)throw Error();let d=await r.json();currentUser=d.user;$("auth").classList.add("hidden");$("app").classList.remove("hidden");$("userName").textContent=d.user.name;$("who").textContent=d.user.email;$("planLabel").textContent=d.user.plan.toUpperCase()+" · "+d.user.role;$("adminNav").classList.toggle("hidden",d.user.role!=="admin");showPage("solver")}catch{token=null;localStorage.removeItem("sb_token");$("auth").classList.remove("hidden")}}
 document.querySelectorAll("[data-page]").forEach(b=>b.onclick=()=>showPage(b.dataset.page));
 $("logout").onclick=()=>{token=null;localStorage.removeItem("sb_token");location.reload()};
