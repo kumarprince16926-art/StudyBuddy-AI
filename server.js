@@ -8,7 +8,6 @@ import jwt from "jsonwebtoken";
 import pg from "pg";
 
 const { Pool } = pg;
-
 const app = express();
 
 if (!process.env.DATABASE_URL) {
@@ -41,10 +40,26 @@ const upload = multer({
   limits: { fileSize: 8 * 1024 * 1024 }
 });
 
-const ai = () => new OpenAI({
-  apiKey: process.env.CLOUDFLARE_API_TOKEN,
-  baseURL: `https://api.cloudflare.com/client/v4/accounts/${process.env.CLOUDFLARE_ACCOUNT_ID}/ai/v1`
-});
+// Reuse Cloudflare AI client
+let cloudflareAI;
+
+function ai() {
+  if (
+    !process.env.CLOUDFLARE_API_TOKEN ||
+    !process.env.CLOUDFLARE_ACCOUNT_ID
+  ) {
+    throw new Error("Cloudflare configuration is missing.");
+  }
+
+  if (!cloudflareAI) {
+    cloudflareAI = new OpenAI({
+      apiKey: process.env.CLOUDFLARE_API_TOKEN,
+      baseURL: `https://api.cloudflare.com/client/v4/accounts/${process.env.CLOUDFLARE_ACCOUNT_ID}/ai/v1`
+    });
+  }
+
+  return cloudflareAI;
+}
 
 // DATABASE SETUP
 async function initializeDatabase() {
@@ -89,7 +104,6 @@ function auth(req, res, next) {
 
     req.user = jwt.verify(token, jwtSecret);
     next();
-
   } catch {
     return res.status(401).json({
       error: "Session expired. Please sign in again."
@@ -146,7 +160,6 @@ app.post("/api/register", async (req, res) => {
     });
 
     res.json({ token, user });
-
   } catch (e) {
     console.error("REGISTER ERROR:", e);
 
@@ -197,7 +210,6 @@ app.post("/api/login", async (req, res) => {
       }),
       user
     });
-
   } catch (e) {
     console.error("LOGIN ERROR:", e);
 
@@ -225,12 +237,12 @@ app.get("/api/me", auth, async (req, res) => {
     }
 
     user.id = Number(user.id);
-
     res.json({ user });
-
   } catch (e) {
     console.error(e);
-    res.status(500).json({ error: "Could not load account." });
+    res.status(500).json({
+      error: "Could not load account."
+    });
   }
 });
 
@@ -247,10 +259,11 @@ app.get("/api/history", auth, async (req, res) => {
     );
 
     res.json({ history: result.rows });
-
   } catch (e) {
     console.error(e);
-    res.status(500).json({ error: "Could not load history." });
+    res.status(500).json({
+      error: "Could not load history."
+    });
   }
 });
 
@@ -263,15 +276,18 @@ app.delete("/api/history/:id", auth, async (req, res) => {
     );
 
     res.json({ ok: true });
-
   } catch (e) {
     console.error(e);
-    res.status(500).json({ error: "Could not delete history." });
+    res.status(500).json({
+      error: "Could not delete history."
+    });
   }
 });
 
-// SOLVE QUESTION USING CLOUDFLARE AI
+// SOLVE QUESTION
 app.post("/api/solve", auth, upload.single("image"), async (req, res) => {
+  const solveStartedAt = Date.now();
+
   try {
     if (
       !process.env.CLOUDFLARE_API_TOKEN ||
@@ -307,11 +323,9 @@ app.post("/api/solve", auth, upload.single("image"), async (req, res) => {
     const userContent = [
       {
         type: "text",
-        text: `You are StudyBuddy, a patient and accurate tutor.
-Subject: ${subject}.
+        text: `Subject: ${subject}.
 Level: ${level}.
 Reply in ${language}.
-Explain step by step with examples when useful.
 Student question: ${question || "Read and solve the attached question."}`
       }
     ];
@@ -325,17 +339,37 @@ Student question: ${question || "Read and solve the attached question."}`
       });
     }
 
+    // Measure AI response time
+    const aiStartedAt = Date.now();
+
     const response = await ai().chat.completions.create({
       model: "@cf/google/gemma-4-26b-a4b-it",
       messages: [
-        { role: "user", content: userContent }
+        {
+          role: "system",
+          content: `You are StudyBuddy, a fast and accurate school tutor.
+Use simple language and answer in the requested language.
+Keep answers concise and easy to understand.
+Explain important steps, give one simple example,
+and end with one practice question.
+Avoid unnecessary introductions.`
+        },
+        {
+          role: "user",
+          content: userContent
+        }
       ],
       max_tokens: 1200
     });
 
+    const aiTime = Date.now() - aiStartedAt;
+
+    console.log("AI response time:", aiTime, "ms");
+
     const answer =
       response.choices?.[0]?.message?.content || "Please try again.";
 
+    // Save answer to PostgreSQL history
     await pool.query(
       `INSERT INTO chats(user_id,question,answer,subject)
        VALUES($1,$2,$3,$4)`,
@@ -347,8 +381,13 @@ Student question: ${question || "Read and solve the attached question."}`
       ]
     );
 
-    res.json({ answer });
+    console.log(
+      "Total solve time:",
+      Date.now() - solveStartedAt,
+      "ms"
+    );
 
+    res.json({ answer });
   } catch (e) {
     console.error("AI ERROR:", e);
 
@@ -379,7 +418,6 @@ app.get("/api/admin/overview", auth, admin, async (req, res) => {
       totalUsers: totals.rows[0].users,
       totalDoubts: doubts.rows[0].doubts
     });
-
   } catch (e) {
     console.error(e);
     res.status(500).json({
@@ -413,7 +451,6 @@ app.patch("/api/admin/users/:id/plan", auth, admin, async (req, res) => {
     }
 
     res.json({ ok: true });
-
   } catch (e) {
     console.error(e);
     res.status(500).json({
