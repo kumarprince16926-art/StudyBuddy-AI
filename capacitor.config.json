@@ -3,6 +3,7 @@
   "appName": "StudyBuddy AI",
   "webDir": "public",
   "server": {
+    "url": "https://studybuddy-ai-1-mktp.onrender.com",
     "androidScheme": "https"
   }
 }
