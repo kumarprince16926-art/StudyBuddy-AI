@@ -12,13 +12,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Get project
+      - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Extract project ZIP
-        run: |
-          mkdir app
-          unzip -q StudyBuddy_AI_Doubt_Solver_v2_Prince_Kumar.zip -d app
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -32,19 +27,23 @@ jobs:
           java-version: '21'
 
       - name: Install dependencies
-        working-directory: app
         run: npm install
 
+      - name: Prepare app logo
+        run: |
+          mkdir -p assets
+          cp file_000000007560821188420cd21ea96764.png assets/icon.png
+
       - name: Create Android project
-        working-directory: app
         run: npx cap add android
 
+      - name: Generate app icons
+        run: npx --yes @capacitor/assets generate --android --iconBackgroundColor '#17142f'
+
       - name: Sync Android
-        working-directory: app
         run: npx cap sync android
 
       - name: Build APK
-        working-directory: app
         run: |
           cd android
           chmod +x gradlew
@@ -54,5 +53,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: StudyBuddy-AI-APK
-          path: app/android/app/build/outputs/apk/debug/app-debug.apk
-          
+          path: android/app/build/outputs/apk/debug/app-debug.apk
