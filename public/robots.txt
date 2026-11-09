@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://studybuddy-ai-4mt4.onrender.com/sitemap.xml
