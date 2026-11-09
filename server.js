@@ -6,9 +6,15 @@ import OpenAI from "openai";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import pg from "pg";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const { Pool } = pg;
 const app = express();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const publicDir = path.join(__dirname, "public");
 
 if (!process.env.DATABASE_URL) {
   throw new Error("DATABASE_URL is missing.");
@@ -33,14 +39,32 @@ pool.on("error", (err) => {
 const jwtSecret = process.env.JWT_SECRET;
 
 app.use(express.json({ limit: "1mb" }));
-app.use(express.static("public"));
+
+// ROBOTS.TXT
+app.get("/robots.txt", (req, res) => {
+  res.set("Cache-Control", "no-store");
+  res.type("text/plain");
+  res.status(200).send(
+    "User-agent: *\nAllow: /\nSitemap: https://studybuddy-ai-1-mktp.onrender.com/sitemap.xml\n"
+  );
+});
+
+// SITEMAP.XML
+app.get("/sitemap.xml", (req, res) => {
+  res.set("Cache-Control", "no-store");
+  res.type("application/xml");
+  res.sendFile(path.join(publicDir, "sitemap.xml"));
+});
+
+// STATIC WEBSITE FILES
+app.use(express.static(publicDir));
 
 const upload = multer({
   storage: multer.memoryStorage(),
   limits: { fileSize: 8 * 1024 * 1024 }
 });
 
-// Reuse Cloudflare AI client
+// CLOUDFLARE AI
 let cloudflareAI;
 
 function ai() {
@@ -339,7 +363,6 @@ Student question: ${question || "Read and solve the attached question."}`
       });
     }
 
-    // Measure AI response time
     const aiStartedAt = Date.now();
 
     const response = await ai().chat.completions.create({
@@ -362,14 +385,11 @@ Avoid unnecessary introductions.`
       max_tokens: 1200
     });
 
-    const aiTime = Date.now() - aiStartedAt;
-
-    console.log("AI response time:", aiTime, "ms");
+    console.log("AI response time:", Date.now() - aiStartedAt, "ms");
 
     const answer =
       response.choices?.[0]?.message?.content || "Please try again.";
 
-    // Save answer to PostgreSQL history
     await pool.query(
       `INSERT INTO chats(user_id,question,answer,subject)
        VALUES($1,$2,$3,$4)`,
@@ -381,11 +401,7 @@ Avoid unnecessary introductions.`
       ]
     );
 
-    console.log(
-      "Total solve time:",
-      Date.now() - solveStartedAt,
-      "ms"
-    );
+    console.log("Total solve time:", Date.now() - solveStartedAt, "ms");
 
     res.json({ answer });
   } catch (e) {
