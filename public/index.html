@@ -4,664 +4,724 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0b1020">
-<meta name="description" content="StudyBuddy AI helps students learn smarter with AI doubt solving, photo questions, notes, quizzes and progress tracking. Created by Prince Kumar.">
+<meta name="description" content="StudyBuddy AI helps students learn with AI doubt solving, photo questions, notes and quizzes. Created by Prince Kumar.">
 <meta name="robots" content="index,follow">
-<meta name="google-site-verification" content="CK4IL4JRzhoI3ce79TWgzjlEBmxU-_IlSHVUn_cIbc4">
 <title>StudyBuddy AI — Learn Smarter</title>
-
 <style>
-:root{
-  --bg:#0b1020;
-  --panel:#121a30;
-  --panel2:#18233e;
-  --text:#f4f7ff;
-  --muted:#9eabc5;
-  --blue:#6c8cff;
-  --cyan:#43d9e8;
-  --border:#293654;
-  --danger:#ff647c;
-  --green:#4ade80;
-}
+:root{--bg:#0b1020;--panel:#121a30;--panel2:#18233e;--text:#f4f7ff;--muted:#9eabc5;--blue:#6c8cff;--cyan:#43d9e8;--border:#293654}
 *{box-sizing:border-box}
-body{
-  margin:0;
-  background:radial-gradient(circle at top,#18294b,var(--bg) 48%);
-  color:var(--text);
-  font-family:system-ui,-apple-system,Segoe UI,sans-serif;
-}
+body{margin:0;background:radial-gradient(circle at top,#18294b,var(--bg) 48%);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,sans-serif}
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
-a{color:var(--cyan)}
-header{
-  padding:17px 5%;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  border-bottom:1px solid var(--border);
-  background:#0b1020dd;
-  position:sticky;
-  top:0;
-  z-index:5;
-  backdrop-filter:blur(12px);
-}
+header{padding:16px 5%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:#0b1020dd;position:sticky;top:0;z-index:5}
 .logo{font-size:21px;font-weight:850}
-.logo span{color:var(--cyan)}
+.logo span,.hero h1 span{color:var(--cyan)}
 .container{width:min(1050px,92%);margin:auto}
-.hero{text-align:center;padding:48px 12px 30px}
+.hero{text-align:center;padding:42px 12px 25px}
 .hero h1{font-size:clamp(30px,6vw,52px);margin:8px 0}
-.hero h1 span{color:var(--cyan)}
 .hero p,.muted{color:var(--muted);line-height:1.6}
-.tag{
-  display:inline-block;
-  padding:7px 13px;
-  border:1px solid var(--border);
-  border-radius:30px;
-  color:var(--cyan);
-  font-size:13px;
-}
-.features{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
-  gap:12px;
-  margin:25px 0;
-}
-.feature,.panel,.stat{
-  background:linear-gradient(145deg,var(--panel),#10182b);
-  border:1px solid var(--border);
-  border-radius:17px;
-  padding:17px;
-}
-.feature b{display:block;margin-bottom:5px}
+.tag{display:inline-block;padding:7px 13px;border:1px solid var(--border);border-radius:30px;color:var(--cyan);font-size:13px}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px;margin:22px 0}
+.feature,.panel,.stat{background:linear-gradient(145deg,var(--panel),#10182b);border:1px solid var(--border);border-radius:17px;padding:17px}
+.feature b{display:block;margin:5px 0}
 .feature small{color:var(--muted)}
 .panel{margin:18px 0;padding:22px}
 h2{margin-top:0;font-size:22px}
-h3{font-size:17px}
-input,select,textarea{
-  width:100%;
-  padding:13px;
-  border-radius:10px;
-  border:1px solid var(--border);
-  background:#0c1427;
-  color:var(--text);
-  outline:none;
-  margin:7px 0 13px;
-}
+input,select,textarea{width:100%;padding:13px;border-radius:10px;border:1px solid var(--border);background:#0c1427;color:var(--text);outline:none;margin:7px 0 13px}
 textarea{min-height:110px;resize:vertical}
-input:focus,select:focus,textarea:focus{
-  border-color:var(--blue);
-}
+input:focus,select:focus,textarea:focus{border-color:var(--blue)}
 label{font-size:13px;color:var(--muted)}
-.btn{
-  border:0;
-  padding:12px 17px;
-  border-radius:10px;
-  background:linear-gradient(100deg,var(--blue),#536ee8);
-  color:white;
-  font-weight:750;
-}
+.btn{border:0;padding:12px 17px;border-radius:10px;background:linear-gradient(100deg,var(--blue),#536ee8);color:white;font-weight:750}
 .btn.secondary{background:var(--panel2);border:1px solid var(--border)}
-.btn.danger{background:#6b2638}
 .btn:disabled{opacity:.5;cursor:not-allowed}
 .btnrow{display:flex;gap:9px;flex-wrap:wrap}
-.tabs{
-  display:flex;gap:8px;overflow:auto;
-  margin:18px 0;padding-bottom:5px
-}
-.tabs button{
-  white-space:nowrap;
-  border:1px solid var(--border);
-  background:var(--panel);
-  color:var(--muted);
-  padding:10px 14px;
-  border-radius:10px;
-}
-.tabs button.active{
-  color:white;background:#263b69;border-color:var(--blue)
-}
+.tabs{display:flex;gap:8px;overflow:auto;margin:18px 0;padding-bottom:5px}
+.tabs button{white-space:nowrap;border:1px solid var(--border);background:var(--panel);color:var(--muted);padding:10px 14px;border-radius:10px}
+.tabs button.active{color:white;background:#263b69;border-color:var(--blue)}
 .hidden{display:none!important}
-.message{
-  padding:12px;
-  border-radius:10px;
-  margin:12px 0;
-  background:#172542;
-  white-space:pre-wrap;
-  line-height:1.65;
-  overflow-wrap:anywhere;
-}
+.message{padding:12px;border-radius:10px;margin:12px 0;background:#172542;white-space:pre-wrap;line-height:1.65;overflow-wrap:anywhere}
 .error{color:#ff9bab;background:#351a29}
 .success{color:#8bf0b0}
 .answer{white-space:pre-wrap;line-height:1.8}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:12px;
-}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
 .stat strong{font-size:28px;display:block;color:var(--cyan)}
 .stat span{font-size:13px;color:var(--muted)}
-.item{
-  padding:14px 0;
-  border-bottom:1px solid var(--border);
-}
-.item:last-child{border:0}
-.option{
-  display:block;
-  width:100%;
-  text-align:left;
-  margin:8px 0;
-  padding:12px;
-  border-radius:9px;
-  border:1px solid var(--border);
-  background:#101a30;
-  color:white;
-}
+.item{padding:14px 0;border-bottom:1px solid var(--border)}
+.option{display:block;width:100%;text-align:left;margin:8px 0;padding:12px;border-radius:9px;border:1px solid var(--border);background:#101a30;color:white}
 .option.selected{border-color:var(--cyan);background:#17354a}
-footer{
-  text-align:center;
-  padding:30px 12px;
-  color:var(--muted);
-  font-size:13px;
-}
-#toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);
-  background:#263b69;padding:12px 18px;border-radius:12px;
-  display:none;z-index:20;max-width:90%;text-align:center}
+.option:disabled{cursor:default;opacity:1}
+footer{text-align:center;padding:30px 12px;color:var(--muted);font-size:13px}
+#toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#263b69;padding:12px 18px;border-radius:12px;display:none;z-index:20;max-width:90%;text-align:center}
 </style>
 </head>
-
 <body>
-
 <header>
-  <div class="logo">📘 StudyBuddy <span>AI</span></div>
-  <div id="accountLabel" class="muted">Student Learning</div>
+<div class="logo">📘 StudyBuddy <span>AI</span></div>
+<div id="accountLabel" class="muted">Student Learning</div>
 </header>
-
 <main class="container">
-
 <section class="hero">
-  <div class="tag">YOUR SMART LEARNING COMPANION</div>
-  <h1>Learn Smarter with <span>StudyBuddy AI</span></h1>
-  <p>Every doubt deserves a clear answer. Learn step by step with AI, photos, voice, notes and quizzes.</p>
-  <p class="muted">Created by Prince Kumar</p>
+<div class="tag">YOUR SMART LEARNING COMPANION</div>
+<h1>Learn Smarter with <span>StudyBuddy AI</span></h1>
+<p>Every doubt deserves a clear answer. Learn step by step with AI, photos, voice, notes and quizzes.</p>
+<p class="muted">Created by Prince Kumar</p>
 </section>
-
 <section class="features">
-  <div class="feature">🧠 <b>AI Doubt Solver</b><small>Understand difficult topics</small></div>
-  <div class="feature">📸 <b>Photo Solver</b><small>Ask using a picture</small></div>
-  <div class="feature">📝 <b>Smart Notes</b><small>Create revision notes</small></div>
-  <div class="feature">🎯 <b>Smart Quiz</b><small>Test your knowledge</small></div>
-  <div class="feature">📊 <b>Progress</b><small>Track your learning</small></div>
+<div class="feature">🧠 <b>AI Doubt Solver</b><small>Understand difficult topics</small></div>
+<div class="feature">📸 <b>Photo Solver</b><small>Ask using a picture</small></div>
+<div class="feature">📝 <b>Smart Notes</b><small>Create revision notes</small></div>
+<div class="feature">🎯 <b>Smart Quiz</b><small>Test your knowledge</small></div>
+<div class="feature">📊 <b>Progress</b><small>Track your learning</small></div>
 </section>
-
-<!-- AUTH -->
 <section id="authSection" class="panel">
-  <h2>Welcome to StudyBuddy</h2>
-  <p class="muted">Sign in or create your student account.</p>
-
-  <div class="tabs">
-    <button id="loginTab" class="active" onclick="showAuth('login')">Sign in</button>
-    <button id="registerTab" onclick="showAuth('register')">Create account</button>
-  </div>
-
-  <form id="authForm">
-    <div id="nameField" class="hidden">
-      <label>Your name</label>
-      <input id="name" placeholder="Enter your name">
-    </div>
-
-    <label>Email address</label>
-    <input id="email" type="email" placeholder="you@example.com" required>
-
-    <label>Password</label>
-    <input id="password" type="password" placeholder="At least 8 characters" minlength="8" required>
-
-    <button class="btn" id="authButton" type="submit">Sign in</button>
-  </form>
-  <div id="authMessage"></div>
+<h2>Welcome to StudyBuddy</h2>
+<p class="muted">Sign in or create your student account.</p>
+<div class="tabs">
+<button id="loginTab" class="active" type="button">Sign in</button>
+<button id="registerTab" type="button">Create account</button>
+</div>
+<form id="authForm">
+<div id="nameField" class="hidden">
+<label>Your name</label>
+<input id="name" placeholder="Enter your name" autocomplete="name">
+</div>
+<label>Email address</label>
+<input id="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+<label>Password</label>
+<input id="password" type="password" placeholder="At least 8 characters" minlength="8" autocomplete="current-password" required>
+<button class="btn" id="authButton" type="submit">Sign in</button>
+</form>
+<div id="authMessage"></div>
+</section>
+<section id="appSection" class="hidden">
+<div class="panel">
+<div class="btnrow" style="justify-content:space-between;align-items:center">
+<div><h2 id="welcome">Welcome!</h2><p class="muted" id="userInfo"></p></div>
+<button class="btn secondary" id="logoutButton">Logout</button>
+</div>
+</div>
+<nav class="tabs" id="appTabs">
+<button class="active" data-page="solver">🧠 Solve</button>
+<button data-page="notes">📝 Notes</button>
+<button data-page="quiz">🎯 Quiz</button>
+<button data-page="history">📚 History</button>
+<button data-page="progress">📊 Progress</button>
+<button id="adminTab" class="hidden" data-page="admin">⚙️ Admin</button>
+</nav>
+<section id="solverPage" class="panel page">
+<h2>🧠 AI Doubt Solver</h2>
+<p class="muted">Ask anything you want to understand.</p>
+<label>Subject</label>
+<select id="subject">
+<option>General</option><option>Mathematics</option><option>Physics</option><option>Chemistry</option><option>Biology</option><option>Computer Science</option><option>English</option><option>History</option><option>Geography</option>
+</select>
+<label>Student level</label>
+<select id="level">
+<option>Class 6</option><option>Class 7</option><option>Class 8</option><option>Class 9</option><option>Class 10</option><option>Class 11</option><option>Class 12</option><option>College</option>
+</select>
+<label>Answer language</label>
+<select id="language"><option>English</option><option>Hindi</option><option>Hinglish</option></select>
+<label>Your question</label>
+<textarea id="question" placeholder="Type your question here..."></textarea>
+<div class="btnrow">
+<button class="btn secondary" id="dictateButton" type="button">🎙️ Dictate</button>
+<button class="btn secondary" id="stopMicButton" type="button">Stop mic</button>
+</div>
+<label>Upload question photo (max 8 MB)</label>
+<input id="photo" type="file" accept="image/jpeg,image/png,image/webp">
+<div class="btnrow">
+<button class="btn" id="solveButton" type="button">Solve my doubt</button>
+<button class="btn secondary" id="readButton" type="button">🔊 Read answer</button>
+<button class="btn secondary" id="stopVoiceButton" type="button">Stop voice</button>
+</div>
+<div id="solveMessage"></div>
+<div id="answerBox" class="message hidden"><h3>StudyBuddy's Answer</h3><div id="answer" class="answer"></div></div>
+</section>
+<section id="notesPage" class="panel page hidden">
+<h2>📝 Notes Generator</h2>
+<p class="muted">Create simple revision notes for any chapter.</p>
+<label>Subject</label>
+<input id="noteSubject" placeholder="e.g. Biology">
+<label>Topic or chapter</label>
+<input id="noteTopic" placeholder="e.g. Photosynthesis">
+<label>Student level</label>
+<select id="noteLevel">
+<option>Class 8</option><option>Class 9</option><option>Class 10</option><option>Class 11</option><option>Class 12</option><option>College</option>
+</select>
+<label>Language</label>
+<select id="noteLanguage"><option>Hindi</option><option>English</option><option>Hinglish</option></select>
+<button class="btn" id="createNotesButton">Generate notes</button>
+<div id="notesMessage"></div>
+<div id="notesResult" class="message hidden"></div>
+<button class="btn secondary hidden" id="downloadNotes">Download notes</button>
+<h3>Saved notes</h3>
+<div id="notesList"></div>
 </section>
 
-<!-- APP -->
-<section id="appSection" class="hidden">
+<section id="quizPage" class="panel page hidden">
+<h2>🎯 Smart Quiz</h2>
+<p class="muted">Generate questions and test your knowledge.</p>
+<label>Subject</label>
+<input id="quizSubject" placeholder="e.g. Science">
+<label>Topic</label>
+<input id="quizTopic" placeholder="e.g. Human digestive system">
+<label>Level</label>
+<select id="quizLevel">
+<option>Class 8</option><option>Class 9</option><option>Class 10</option><option>Class 11</option><option>Class 12</option>
+</select>
+<label>Language</label>
+<select id="quizLanguage"><option>English</option><option>Hindi</option><option>Hinglish</option></select>
+<button class="btn" id="generateQuizButton">Generate quiz</button>
+<div id="quizMessage"></div>
+<div id="quizArea"></div>
+</section>
 
-  <div class="panel">
-    <div class="btnrow" style="justify-content:space-between;align-items:center">
-      <div>
-        <h2 id="welcome">Welcome!</h2>
-        <p class="muted" id="userInfo"></p>
-      </div>
-      <button class="btn secondary" onclick="logout()">Logout</button>
-    </div>
-  </div>
+<section id="historyPage" class="panel page hidden">
+<h2>📚 Your Doubt History</h2>
+<button class="btn secondary" id="refreshHistoryButton">Refresh history</button>
+<div id="historyList"></div>
+</section>
 
-  <nav class="tabs">
-    <button class="active" onclick="showPage('solver',this)">🧠 Solve</button>
-    <button onclick="showPage('notes',this)">📝 Notes</button>
-    <button onclick="showPage('quiz',this)">🎯 Quiz</button>
-    <button onclick="showPage('history',this)">📚 History</button>
-    <button onclick="showPage('progress',this)">📊 Progress</button>
-    <button id="adminTab" class="hidden" onclick="showPage('admin',this)">⚙️ Admin</button>
-  </nav>
+<section id="progressPage" class="panel page hidden">
+<h2>📊 Learning Progress</h2>
+<button class="btn secondary" id="refreshProgressButton">Refresh progress</button>
+<div class="grid" id="progressStats"></div>
+<h3>Recent quizzes</h3>
+<div id="recentQuizzes"></div>
+</section>
 
-  <!-- SOLVER -->
-  <section id="solverPage" class="panel">
-    <h2>🧠 AI Doubt Solver</h2>
-    <p class="muted">Ask anything you want to understand.</p>
-
-    <label>Subject</label>
-    <select id="subject">
-      <option>General</option>
-      <option>Mathematics</option>
-      <option>Physics</option>
-      <option>Chemistry</option>
-      <option>Biology</option>
-      <option>Computer Science</option>
-      <option>English</option>
-      <option>History</option>
-      <option>Geography</option>
-    </select>
-
-    <label>Student level</label>
-    <select id="level">
-      <option>Class 6</option><option>Class 7</option>
-      <option>Class 8</option><option>Class 9</option>
-      <option>Class 10</option><option>Class 11</option>
-      <option>Class 12</option><option>College</option>
-    </select>
-
-    <label>Answer language</label>
-    <select id="language">
-      <option>English</option>
-      <option>Hindi</option>
-      <option>Hinglish</option>
-    </select>
-
-    <label>Your question</label>
-    <textarea id="question" placeholder="Type your question here..."></textarea>
-
-    <div class="btnrow">
-      <button class="btn secondary" onclick="startDictation()">🎙️ Dictate</button>
-      <button class="btn secondary" onclick="stopDictation()">Stop mic</button>
-    </div>
-
-    <label>Upload question photo (max 8 MB)</label>
-    <input id="photo" type="file" accept="image/jpeg,image/png,image/webp">
-
-    <div class="btnrow">
-      <button class="btn" onclick="solve()">Solve my doubt</button>
-      <button class="btn secondary" onclick="readAnswer()">🔊 Read answer</button>
-      <button class="btn secondary" onclick="speechSynthesis.cancel()">Stop voice</button>
-    </div>
-
-    <div id="solveMessage"></div>
-    <div id="answerBox" class="message hidden">
-      <h3>StudyBuddy's Answer</h3>
-      <div id="answer" class="answer"></div>
-    </div>
-  </section>
-
-  <!-- NOTES -->
-  <section id="notesPage" class="panel hidden">
-    <h2>📝 Notes Generator</h2>
-    <p class="muted">Create simple revision notes for any chapter.</p>
-    <label>Subject</label>
-    <input id="noteSubject" placeholder="e.g. Biology">
-    <label>Topic or chapter</label>
-    <input id="noteTopic" placeholder="e.g. Photosynthesis">
-    <label>Student level</label>
-    <select id="noteLevel">
-      <option>Class 8</option><option>Class 9</option>
-      <option>Class 10</option><option>Class 11</option>
-      <option>Class 12</option><option>College</option>
-    </select>
-    <label>Language</label>
-    <select id="noteLanguage">
-      <option>Hindi</option><option>English</option><option>Hinglish</option>
-    </select>
-    <button class="btn" onclick="createNotes()">Generate notes</button>
-    <div id="notesMessage"></div>
-    <div id="notesResult" class="message hidden"></div>
-    <button class="btn secondary hidden" id="downloadNotes" onclick="downloadText('notesResult','StudyBuddy-Notes.txt')">Download notes</button>
-    <h3>Saved notes</h3>
-    <div id="notesList"></div>
-  </section>
-
-  <!-- QUIZ -->
-  <section id="quizPage" class="panel hidden">
-    <h2>🎯 Smart Quiz</h2>
-    <p class="muted">Generate questions and test your knowledge.</p>
-    <label>Subject</label>
-    <input id="quizSubject" placeholder="e.g. Science">
-    <label>Topic</label>
-    <input id="quizTopic" placeholder="e.g. Human digestive system">
-    <label>Level</label>
-    <select id="quizLevel">
-      <option>Class 8</option><option>Class 9</option>
-      <option>Class 10</option><option>Class 11</option>
-      <option>Class 12</option>
-    </select>
-    <label>Language</label>
-    <select id="quizLanguage">
-      <option>English</option><option>Hindi</option><option>Hinglish</option>
-    </select>
-    <button class="btn" onclick="generateQuiz()">Generate quiz</button>
-    <div id="quizMessage"></div>
-    <div id="quizArea"></div>
-  </section>
-
-  <!-- HISTORY -->
-  <section id="historyPage" class="panel hidden">
-    <h2>📚 Your Doubt History</h2>
-    <button class="btn secondary" onclick="loadHistory()">Refresh history</button>
-    <div id="historyList"></div>
-  </section>
-
-  <!-- PROGRESS -->
-  <section id="progressPage" class="panel hidden">
-    <h2>📊 Learning Progress</h2>
-    <button class="btn secondary" onclick="loadProgress()">Refresh progress</button>
-    <div class="grid" id="progressStats"></div>
-    <h3>Recent quizzes</h3>
-    <div id="recentQuizzes"></div>
-  </section>
-
-  <!-- ADMIN -->
-  <section id="adminPage" class="panel hidden">
-    <h2>⚙️ Admin Dashboard</h2>
-    <button class="btn secondary" onclick="loadAdmin()">Refresh dashboard</button>
-    <div id="adminStats" class="grid"></div>
-    <h3>Students</h3>
-    <div id="adminUsers"></div>
-  </section>
-
+<section id="adminPage" class="panel page hidden">
+<h2>⚙️ Admin Dashboard</h2>
+<button class="btn secondary" id="refreshAdminButton">Refresh dashboard</button>
+<div id="adminStats" class="grid"></div>
+<h3>Students</h3>
+<div id="adminUsers"></div>
+</section>
 </section>
 </main>
-
-<footer>
-  StudyBuddy AI © 2026 · Created by Prince Kumar
-  <p>Learn • Practice • Improve</p>
+<footer>StudyBuddy AI © 2026 · Created by Prince Kumar
+<p>Learn • Practice • Improve</p>
 </footer>
-
 <div id="toast"></div>
 
 <script>
-let token = localStorage.getItem("studybuddy_token");
-let currentUser = null;
-let authMode = "login";
-let quizData = [];
-let quizAnswers = {};
-let recognition = null;
+"use strict";
 
-const $ = id => document.getElementById(id);
+let token=localStorage.getItem("studybuddy_token");
+let currentUser=null,authMode="login",quizData=[],quizAnswers={},recognition=null,quizSubmitted=false;
+
+const $=id=>document.getElementById(id);
 
 function toast(message){
-  $("toast").textContent = message;
-  $("toast").style.display = "block";
-  setTimeout(() => $("toast").style.display = "none", 3000);
+$("toast").textContent=message;
+$("toast").style.display="block";
+setTimeout(()=>$("toast").style.display="none",3000);
 }
 
-function showMessage(id,message,error=false){
-  $(id).innerHTML = "";
-  const div = document.createElement("div");
-  div.className = "message" + (error ? " error" : " success");
-  div.textContent = message;
-  $(id).appendChild(div);
+function showMessage(id,message,isError=false){
+const target=$(id);
+target.replaceChildren();
+const d=document.createElement("div");
+d.className="message "+(isError?"error":"success");
+d.textContent=message;
+target.appendChild(d);
 }
 
-async function api(url, options={}){
-  const headers = {...(options.headers || {})};
-  if(token) headers.Authorization = "Bearer " + token;
-
-  const response = await fetch(url,{...options,headers});
-  const data = await response.json().catch(() => ({}));
-
-  if(!response.ok){
-    throw new Error(data.error || "Something went wrong.");
-  }
-  return data;
+async function api(url,options={}){
+const headers={...(options.headers||{})};
+if(token)headers.Authorization="Bearer "+token;
+const response=await fetch(url,{...options,headers});
+const type=response.headers.get("content-type")||"";
+let data;
+if(type.includes("application/json"))data=await response.json();
+else{
+await response.text();
+throw new Error(`Server returned a non-JSON response (${response.status}). Check the server route.`);
+}
+if(!response.ok)throw new Error(data.error||`Request failed (${response.status}).`);
+return data;
 }
 
 function showAuth(mode){
-  authMode = mode;
-  $("nameField").classList.toggle("hidden",mode !== "register");
-  $("loginTab").classList.toggle("active",mode === "login");
-  $("registerTab").classList.toggle("active",mode === "register");
-  $("authButton").textContent = mode === "login" ? "Sign in" : "Create account";
-  $("authMessage").innerHTML = "";
+authMode=mode;
+$("nameField").classList.toggle("hidden",mode!=="register");
+$("name").required=mode==="register";
+$("loginTab").classList.toggle("active",mode==="login");
+$("registerTab").classList.toggle("active",mode==="register");
+$("authButton").textContent=mode==="login"?"Sign in":"Create account";
+$("password").autocomplete=mode==="login"?"current-password":"new-password";
+$("authMessage").replaceChildren();
 }
 
+$("loginTab").addEventListener("click",()=>showAuth("login"));
+$("registerTab").addEventListener("click",()=>showAuth("register"));
+
 $("authForm").addEventListener("submit",async e=>{
-  e.preventDefault();
-  const button = $("authButton");
-  button.disabled = true;
+e.preventDefault();
+const button=$("authButton");
+button.disabled=true;
+button.textContent="Please wait...";
+try{
+const body={email:$("email").value.trim(),password:$("password").value};
+if(authMode==="register")body.name=$("name").value.trim();
 
-  try{
-    const body = {
-      email:$("email").value.trim(),
-      password:$("password").value
-    };
-    if(authMode === "register") body.name = $("name").value.trim();
+const data=await api(authMode==="login"?"/api/login":"/api/register",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify(body)
+});
 
-    const data = await api(authMode === "login" ? "/api/login" : "/api/register",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify(body)
-    });
+if(!data.token)throw new Error("Server did not return a login token.");
 
-    token = data.token;
-    localStorage.setItem("studybuddy_token",token);
-    await loadUser();
-    toast("Welcome to StudyBuddy AI!");
-  }catch(e){
-    showMessage("authMessage",e.message,true);
-  }finally{
-    button.disabled = false;
-  }
+token=data.token;
+localStorage.setItem("studybuddy_token",token);
+await loadUser();
+toast("Welcome to StudyBuddy AI!");
+}catch(err){
+showMessage("authMessage",err.message,true);
+}finally{
+button.disabled=false;
+button.textContent=authMode==="login"?"Sign in":"Create account";
+}
 });
 
 async function loadUser(){
-  try{
-    const data = await api("/api/me");
-    currentUser = data.user;
-    $("authSection").classList.add("hidden");
-    $("appSection").classList.remove("hidden");
-    $("welcome").textContent = "Welcome, " + currentUser.name + "!";
-    $("userInfo").textContent =
-      currentUser.email + " · " + currentUser.plan.toUpperCase();
-    $("accountLabel").textContent = currentUser.name;
-
-    $("adminTab").classList.toggle("hidden",currentUser.role !== "admin");
-
-    loadHistory();
-    loadNotes();
-  }catch(e){
-    logout(false);
-  }
+try{
+const data=await api("/api/me");
+currentUser=data.user;
+if(!currentUser)throw new Error("Account data missing.");
+$("authSection").classList.add("hidden");
+$("appSection").classList.remove("hidden");
+$("welcome").textContent="Welcome, "+currentUser.name+"!";
+$("userInfo").textContent=currentUser.email+" · "+String(currentUser.plan||"free").toUpperCase();
+$("accountLabel").textContent=currentUser.name;
+$("adminTab").classList.toggle("hidden",currentUser.role!=="admin");
+loadHistory();
+loadNotes();
+}catch(err){
+logout(false);
+showAuth("login");
+if(err.message!=="Please sign in first.")showMessage("authMessage",err.message,true);
+}
 }
 
 function logout(show=true){
-  token = null;
-  currentUser = null;
-  localStorage.removeItem("studybuddy_token");
-  $("appSection").classList.add("hidden");
-  $("authSection").classList.remove("hidden");
-  $("accountLabel").textContent = "Student Learning";
-  if(show) toast("Logged out successfully.");
+token=null;
+currentUser=null;
+localStorage.removeItem("studybuddy_token");
+$("appSection").classList.add("hidden");
+$("authSection").classList.remove("hidden");
+$("accountLabel").textContent="Student Learning";
+showAuth("login");
+if(show)toast("Logged out successfully");
 }
+
+$("logoutButton").addEventListener("click",()=>logout());
 
 function showPage(page,button){
-  document.querySelectorAll("#appSection > section").forEach(el=>{
-    el.classList.add("hidden");
-  });
-  $(page+"Page").classList.remove("hidden");
-
-  document.querySelectorAll("#appSection nav button").forEach(el=>{
-    el.classList.remove("active");
-  });
-  if(button) button.classList.add("active");
-
-  if(page === "history") loadHistory();
-  if(page === "progress") loadProgress();
-  if(page === "notes") loadNotes();
-  if(page === "admin") loadAdmin();
+document.querySelectorAll(".page").forEach(el=>el.classList.add("hidden"));
+$(page+"Page").classList.remove("hidden");
+document.querySelectorAll("#appTabs button").forEach(el=>el.classList.remove("active"));
+if(button)button.classList.add("active");
+if(page==="history")loadHistory();
+if(page==="progress")loadProgress();
+if(page==="notes")loadNotes();
+if(page==="admin")loadAdmin();
 }
+
+document.querySelectorAll("#appTabs button[data-page]").forEach(button=>{
+button.addEventListener("click",()=>showPage(button.dataset.page,button));
+});
 
 async function solve(){
-  const question = $("question").value.trim();
-  const photo = $("photo").files[0];
+const question=$("question").value.trim();
+const photo=$("photo").files[0];
 
-  if(!question && !photo){
-    return showMessage("solveMessage","Enter a question or upload a photo.",true);
-  }
-  if(photo && photo.size > 8*1024*1024){
-    return showMessage("solveMessage","Photo must be smaller than 8 MB.",true);
-  }
+if(!question&&!photo)return showMessage("solveMessage","Enter a question or upload a photo.",true);
+if(photo&&photo.size>8*1024*1024)return showMessage("solveMessage","Photo must be smaller than 8 MB.",true);
 
-  const form = new FormData();
-  form.append("question",question);
-  form.append("subject",$("subject").value);
-  form.append("level",$("level").value);
-  form.append("language",$("language").value);
-  if(photo) form.append("image",photo);
+const form=new FormData();
+form.append("question",question);
+form.append("subject",$("subject").value);
+form.append("level",$("level").value);
+form.append("language",$("language").value);
+if(photo)form.append("image",photo);
 
-  showMessage("solveMessage","StudyBuddy AI is solving your question...");
-  $("answerBox").classList.add("hidden");
+showMessage("solveMessage","StudyBuddy AI is solving your question...");
+$("answerBox").classList.add("hidden");
 
-  try{
-    const data = await api("/api/solve",{method:"POST",body:form});
-    $("answer").textContent = data.answer;
-    $("answerBox").classList.remove("hidden");
-    $("solveMessage").innerHTML = "";
-    loadHistory();
-  }catch(e){
-    showMessage("solveMessage",e.message,true);
-  }
+try{
+const data=await api("/api/solve",{method:"POST",body:form});
+$("answer").textContent=data.answer||"No answer returned.";
+$("answerBox").classList.remove("hidden");
+$("solveMessage").replaceChildren();
+loadHistory();
+}catch(err){
+showMessage("solveMessage",err.message,true);
+}
 }
 
-function startDictation(){
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if(!SpeechRecognition) return toast("Voice typing is not supported in this browser.");
+$("solveButton").addEventListener("click",solve);
 
-  recognition = new SpeechRecognition();
-  recognition.lang = $("language").value === "Hindi" ? "hi-IN" : "en-IN";
-  recognition.continuous = true;
-  recognition.onresult = event=>{
-    let text = "";
-    for(let i=event.resultIndex;i<event.results.length;i++){
-      text += event.results[i][0].transcript;
-    }
-    $("question").value += text;
-  };
-  recognition.onerror = () => toast("Microphone error.");
-  recognition.start();
-}
+$("dictateButton").addEventListener("click",()=>{
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+if(!SR)return toast("Voice typing is not supported in this browser.");
+recognition=new SR();
+recognition.lang=$("language").value==="Hindi"?"hi-IN":"en-IN";
+recognition.continuous=true;
+recognition.onresult=e=>{
+let text="";
+for(let i=e.resultIndex;i<e.results.length;i++)text+=e.results[i][0].transcript;
+$("question").value+=" "+text;
+};
+recognition.onerror=()=>toast("Microphone error.");
+recognition.start();
+});
 
-function stopDictation(){
-  if(recognition) recognition.stop();
-}
+$("stopMicButton").addEventListener("click",()=>{
+if(recognition)recognition.stop();
+});
 
-function readAnswer(){
-  const text = $("answer").textContent;
-  if(!text) return toast("No answer available yet.");
-  speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = $("language").value === "Hindi" ? "hi-IN" : "en-IN";
-  speechSynthesis.speak(utterance);
-}
+$("readButton").addEventListener("click",()=>{
+const text=$("answer").textContent;
+if(!text)return toast("No answer available yet.");
+if(!("speechSynthesis" in window))return toast("Read aloud is not supported.");
+speechSynthesis.cancel();
+const utterance=new SpeechSynthesisUtterance(text);
+utterance.lang=$("language").value==="Hindi"?"hi-IN":"en-IN";
+speechSynthesis.speak(utterance);
+});
+
+$("stopVoiceButton").addEventListener("click",()=>{
+if("speechSynthesis" in window)speechSynthesis.cancel();
+});
 
 async function createNotes(){
-  const topic = $("noteTopic").value.trim();
-  if(!topic) return toast("Enter a topic first.");
+const topic=$("noteTopic").value.trim();
+if(!topic)return toast("Enter a topic first.");
+showMessage("notesMessage","Creating your notes...");
+$("notesResult").classList.add("hidden");
 
-  showMessage("notesMessage","Creating your notes...");
-  $("notesResult").classList.add("hidden");
+try{
+const data=await api("/api/notes",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({
+topic,
+subject:$("noteSubject").value||"General",
+level:$("noteLevel").value,
+language:$("noteLanguage").value
+})
+});
+$("notesResult").textContent=data.note.content;
+$("notesResult").classList.remove("hidden");
+$("downloadNotes").classList.remove("hidden");
+$("notesMessage").replaceChildren();
+loadNotes();
+}catch(err){
+showMessage("notesMessage",err.message,true);
+}
+}
 
-  try{
-    const data = await api("/api/notes",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({
-        topic,
-        subject:$("noteSubject").value || "General",
-        level:$("noteLevel").value,
-        language:$("noteLanguage").value
-      })
-    });
+$("createNotesButton").addEventListener("click",createNotes);
 
-    $("notesResult").textContent = data.note.content;
-    $("notesResult").classList.remove("hidden");
-    $("downloadNotes").classList.remove("hidden");
-    $("notesMessage").innerHTML = "";
-    loadNotes();
-  }catch(e){
-    showMessage("notesMessage",e.message,true);
-  }
+$("downloadNotes").addEventListener("click",()=>{
+downloadText("notesResult","StudyBuddy-Notes.txt");
+});
+
+function downloadText(elementId,filename){
+const blob=new Blob([$(elementId).textContent],{type:"text/plain;charset=utf-8"});
+const url=URL.createObjectURL(blob);
+const a=document.createElement("a");
+a.href=url;
+a.download=filename;
+a.click();
+URL.revokeObjectURL(url);
 }
 
 async function loadNotes(){
-  try{
-    const data = await api("/api/notes");
-    $("notesList").innerHTML = "";
+try{
+const data=await api("/api/notes");
+$("notesList").replaceChildren();
+(data.notes||[]).forEach(note=>{
+const d=document.createElement("div");
+d.className="item";
+const b=document.createElement("b");
+b.textContent=note.topic;
+const p=document.createElement("p");
+p.className="muted";
+p.textContent=(note.content||"").slice(0,180)+"...";
+d.append(b,p);
+$("notesList").append(d);
+});
+}catch(err){
+console.warn("Notes load:",err.message);
+}
+}
+  async function generateQuiz(){
+const topic=$("quizTopic").value.trim();
+if(!topic)return toast("Enter a quiz topic.");
 
-    data.notes.forEach(note=>{
-      const div = document.createElement("div");
-      div.className = "item";
-      const title = document.createElement("b");
-      title.textContent = note.topic;
-      const content = document.createElement("p");
-      content.className = "muted";
-      content.textContent = note.content.slice(0,180) + "...";
-      div.append(title,content);
-      $("notesList").appendChild(div);
-    });
-  }catch(e){}
+showMessage("quizMessage","Generating your quiz...");
+$("quizArea").replaceChildren();
+
+try{
+const data=await api("/api/quiz",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({
+topic,
+subject:$("quizSubject").value||"General",
+level:$("quizLevel").value,
+language:$("quizLanguage").value
+})
+});
+
+quizData=data.questions||[];
+quizAnswers={};
+quizSubmitted=false;
+renderQuiz();
+$("quizMessage").replaceChildren();
+
+}catch(err){
+showMessage("quizMessage",err.message,true);
+}
 }
 
-function downloadText(elementId,filename){
-  const content = $(elementId).textContent;
-  const blob = new Blob([content],{type:"text/plain;charset=utf-8"});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = filename;
-  a.click();
-  URL.revokeObjectURL(url);
-}
-
-async function generateQuiz(){
-  const topic = $("quizTopic").value.trim();
-  if(!topic) return toast("Enter a quiz topic.");
-
-  showMessage("quizMessage","Generating your quiz...");
-  $("quizArea").innerHTML = "";
-
-  try{
-    const data = await api("/api/quiz",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({
-        topic,
-        subject:$("quizSubject").value || "General",
-        level:$("quizLevel").value,
-        language:$("quizLanguage").value
-      })
-    });
-
-    quizData = data.questions;
-    quizAnswers = {};
-    renderQuiz();
-    $("quizMessage").innerHTML = "";
-  }catch(e){
-    showMessage("quizMessage",e.message,true);
-  }
-}
+$("generateQuizButton").addEventListener("click",generateQuiz);
 
 function renderQuiz(){
-  const area = $("quizArea");
-  area.innerHTML = "";
+const area=$("quizArea");
+area.replaceChildren();
 
-  quizData.forEach((q,i)=>{
-    const box = document.createElement("div");
-    box.className = "item";
-    const title = document.createElement("h3");
-    title.textContent = (i+1)+". "+q.question;
-    box.appendChild(title);
+quizData.forEach((q,i)=>{
+const box=document.createElement("div");
+box.className="item";
 
-    q.opti
+const title=document.createElement("h3");
+title.textContent=(i+1)+". "+q.question;
+box.appendChild(title);
+
+(q.options||[]).forEach((option,j)=>{
+const btn=document.createElement("button");
+btn.type="button";
+btn.className="option"+(quizAnswers[i]===j?" selected":"");
+btn.textContent=option;
+btn.disabled=quizSubmitted;
+
+btn.addEventListener("click",()=>{
+quizAnswers[i]=j;
+renderQuiz();
+});
+
+box.appendChild(btn);
+});
+
+if(quizSubmitted){
+const result=document.createElement("p");
+result.className="muted";
+result.textContent=(quizAnswers[i]===Number(q.correct)?"Correct. ":"Incorrect. ")+(q.explanation||"");
+box.appendChild(result);
+}
+
+area.appendChild(box);
+});
+
+if(quizData.length&&!quizSubmitted){
+const submit=document.createElement("button");
+submit.className="btn";
+submit.textContent="Submit Quiz";
+submit.addEventListener("click",submitQuiz);
+area.appendChild(submit);
+}
+}
+
+async function submitQuiz(){
+if(quizData.some((q,i)=>quizAnswers[i]===undefined)){
+return toast("Please answer every question.");
+}
+
+const score=quizData.reduce((sum,q,i)=>
+sum+(quizAnswers[i]===Number(q.correct)?1:0),0);
+
+quizSubmitted=true;
+renderQuiz();
+
+const result=document.createElement("div");
+result.className="message success";
+result.textContent=`Your score: ${score}/${quizData.length}`;
+$("quizArea").appendChild(result);
+
+try{
+await api("/api/quiz/submit",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({
+topic:$("quizTopic").value.trim(),
+score,
+total:quizData.length
+})
+});
+}catch(err){
+toast("Quiz result could not be saved: "+err.message);
+}
+}
+
+async function loadHistory(){
+try{
+const data=await api("/api/history");
+const list=$("historyList");
+list.replaceChildren();
+
+(data.history||[]).forEach(item=>{
+const box=document.createElement("div");
+box.className="item";
+
+const title=document.createElement("b");
+title.textContent=item.subject||"General";
+
+const question=document.createElement("p");
+question.textContent=item.question||"";
+
+const answer=document.createElement("p");
+answer.className="muted";
+answer.textContent=(item.answer||"").slice(0,220);
+
+box.append(title,question,answer);
+
+if(item.id){
+const del=document.createElement("button");
+del.className="btn secondary";
+del.textContent="Delete";
+del.addEventListener("click",async()=>{
+if(!confirm("Delete this history item?"))return;
+try{
+await api("/api/history/"+encodeURIComponent(item.id),{method:"DELETE"});
+loadHistory();
+}catch(err){toast(err.message);}
+});
+box.appendChild(del);
+}
+
+list.appendChild(box);
+});
+}catch(err){
+console.warn("History:",err.message);
+}
+}
+
+$("refreshHistoryButton").addEventListener("click",loadHistory);
+
+async function loadProgress(){
+try{
+const data=await api("/api/progress");
+const stats=$("progressStats");
+stats.replaceChildren();
+
+const values=[
+["Doubts solved",data.doubtsSolved||0],
+["Notes created",data.notesCreated||0],
+["Quizzes taken",data.quizzesTaken||0],
+["Quiz score",`${data.quizScore||0}/${data.quizTotal||0}`]
+];
+
+values.forEach(([label,value])=>{
+const box=document.createElement("div");
+box.className="stat";
+const strong=document.createElement("strong");
+strong.textContent=value;
+const span=document.createElement("span");
+span.textContent=label;
+box.append(strong,span);
+stats.appendChild(box);
+});
+
+const recent=$("recentQuizzes");
+recent.replaceChildren();
+
+(data.recentQuizzes||[]).forEach(item=>{
+const p=document.createElement("p");
+p.className="item";
+p.textContent=`${item.topic||"Quiz"} — ${item.score}/${item.total}`;
+recent.appendChild(p);
+});
+
+}catch(err){
+showMessage("progressStats",err.message,true);
+}
+}
+
+$("refreshProgressButton").addEventListener("click",loadProgress);
+
+async function loadAdmin(){
+try{
+const data=await api("/api/admin/overview");
+const stats=$("adminStats");
+stats.replaceChildren();
+
+const values=[
+["Total users",data.totalUsers||0],
+["Total doubts",data.totalDoubts||0],
+["Total notes",data.totalNotes||0],
+["Total quizzes",data.totalQuizzes||0]
+];
+
+values.forEach(([label,value])=>{
+const box=document.createElement("div");
+box.className="stat";
+const strong=document.createElement("strong");
+strong.textContent=value;
+const span=document.createElement("span");
+span.textContent=label;
+box.append(strong,span);
+stats.appendChild(box);
+});
+
+const users=$("adminUsers");
+users.replaceChildren();
+
+(data.users||[]).forEach(user=>{
+const box=document.createElement("div");
+box.className="item";
+
+const name=document.createElement("b");
+name.textContent=user.name+" — "+user.email;
+
+const plan=document.createElement("p");
+plan.className="muted";
+plan.textContent="Plan: "+(user.plan||"free");
+
+const button=document.createElement("button");
+button.className="btn secondary";
+button.textContent=(user.plan==="premium"?"Set Free":"Set Premium");
+
+button.addEventListener("click",async()=>{
+const newPlan=user.plan==="premium"?"free":"premium";
+try{
+await api("/api/admin/users/"+encodeURIComponent(user.id)+"/plan",{
+method:"PATCH",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({plan:newPlan})
+});
+toast("Plan updated.");
+loadAdmin();
+}catch(err){toast(err.message);}
+});
+
+box.append(name,plan,button);
+users.appendChild(box);
+});
+
+}catch(err){
+showMessage("adminStats",err.message,true);
+}
+}
+
+$("refreshAdminButton").addEventListener("click",loadAdmin);
+
+showAuth("login");
+if(token)loadUser();
+
+</script>
+</body>
+</html>
