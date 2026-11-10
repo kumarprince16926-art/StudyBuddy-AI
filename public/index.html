@@ -1,39 +1,481 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0b1020"><title>StudyBuddy AI — by Prince Kumar</title>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b1020">
+<meta name="google-site-verification" content="CK4IL4JRzhoI3ce79TWgzjlEBmxU-_IlSHVUn_cIbc4" />
+<meta name="description" content="StudyBuddy AI helps students learn smarter with AI doubt solving, photo questions, voice support, notes and quizzes. Created by Prince Kumar.">
+<meta name="robots" content="index,follow">
+
+<title>StudyBuddy AI — by Prince Kumar</title>
+
 <style>
-:root{--bg:#0b1020;--panel:#121a2d;--panel2:#19243c;--line:#263552;--text:#edf3ff;--muted:#9eacc7;--accent:#8b7cff;--cyan:#52d6d0}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 10% 0%,#22214d 0,transparent 35%),var(--bg);color:var(--text);font:15px system-ui,Arial}header{display:flex;align-items:center;justify-content:space-between;padding:16px 5%;border-bottom:1px solid var(--line);position:sticky;top:0;background:#0b1020ed;backdrop-filter:blur(12px);z-index:3}.brand{font-weight:850;font-size:20px}.brand span{color:var(--cyan)}main{max-width:1150px;margin:30px auto;padding:0 18px}.hero h1{font-size:clamp(28px,5vw,42px);margin:0 0 8px;letter-spacing:-1.3px}.muted{color:var(--muted)}.layout{display:grid;grid-template-columns:235px 1fr;gap:16px;margin-top:22px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:17px}.nav button{display:block;width:100%;text-align:left;margin:6px 0;background:var(--panel2);color:var(--text);border:1px solid var(--line)}button{border:0;border-radius:11px;background:linear-gradient(100deg,var(--accent),#5d9bff);color:white;padding:11px 15px;font-weight:700;cursor:pointer;margin:5px 4px 5px 0}button.secondary{background:var(--panel2);border:1px solid var(--line);color:var(--text)}button:disabled{opacity:.55}input,select,textarea{width:100%;padding:11px;border-radius:10px;border:1px solid var(--line);background:#0d1527;color:var(--text);font:inherit;margin:5px 0 10px}textarea{min-height:120px;resize:vertical}
+:root{--bg:#0b1020;--panel:#121a2d;--panel2:#19243c;--line:#263552;--text:#edf3ff;--muted:#9eacc7;--accent:#8b7cff;--cyan:#52d6d0}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at 10% 0%,#22214d 0,transparent 35%),var(--bg);color:var(--text);font:15px system-ui,Arial}
+header{display:flex;align-items:center;justify-content:space-between;padding:16px 5%;border-bottom:1px solid var(--line);position:sticky;top:0;background:#0b1020ed;backdrop-filter:blur(12px);z-index:3}
+.brand{font-weight:850;font-size:20px}
+.brand span{color:var(--cyan)}
+main{max-width:1150px;margin:30px auto;padding:0 18px}
+.hero h1{font-size:clamp(28px,5vw,42px);margin:0 0 8px;letter-spacing:-1.3px}
+.muted{color:var(--muted)}
+.layout{display:grid;grid-template-columns:235px 1fr;gap:16px;margin-top:22px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:17px}
+.nav button{display:block;width:100%;text-align:left;margin:6px 0;background:var(--panel2);color:var(--text);border:1px solid var(--line)}
+button{border:0;border-radius:11px;background:linear-gradient(100deg,var(--accent),#5d9bff);color:white;padding:11px 15px;font-weight:700;cursor:pointer;margin:5px 4px 5px 0}
+button.secondary{background:var(--panel2);border:1px solid var(--line);color:var(--text)}
+button:disabled{opacity:.55}
+input,select,textarea{width:100%;padding:11px;border-radius:10px;border:1px solid var(--line);background:#0d1527;color:var(--text);font:inherit;margin:5px 0 10px}
+textarea{min-height:120px;resize:vertical}
 .password-wrap{position:relative}
 .password-wrap input{padding-right:52px}
 .toggle-password{position:absolute;right:9px;top:7px;margin:5px 0;padding:7px 9px;background:transparent;border:0;color:var(--muted);font-size:19px;line-height:1}
 .toggle-password:hover{background:var(--panel2)}
-.row{display:flex;gap:10px}.row>*{flex:1}.hidden{display:none!important}.result{white-space:pre-wrap;line-height:1.65;background:#0d1527;border:1px solid var(--line);padding:15px;border-radius:12px;margin-top:14px;min-height:65px}.tile{padding:13px;border-radius:12px;background:var(--panel2);margin:8px 0}.small{font-size:12px;color:var(--muted)}.credit{text-align:center;color:var(--muted);font-size:12px;margin:25px}.badge{display:inline-block;border:1px solid #536487;border-radius:30px;padding:4px 9px;font-size:11px;color:var(--cyan)}.history-item{border-bottom:1px solid var(--line);padding:12px 0}.price{font-size:25px;font-weight:800}.voice{display:flex;gap:6px;flex-wrap:wrap}@media(max-width:760px){.layout{grid-template-columns:1fr}.nav{display:grid;grid-template-columns:repeat(2,1fr);gap:5px}.row{display:block}header{padding:13px 16px}}
-</style></head><body>
-<header><div class="brand">✦ Study<span>Buddy</span> AI</div><div id="who" class="small">Your learning companion</div></header>
-<main><section class="hero"><h1>Every doubt deserves a <span style="color:var(--cyan)">clear answer.</span></h1><p class="muted">Learn step by step, with photo and voice support.</p></section>
-<section id="auth" class="panel" style="max-width:480px;margin:22px auto"><h2>Welcome to StudyBuddy</h2><p class="muted">Sign in or create your student account.</p><div class="row"><button id="loginTab">Sign in</button><button id="registerTab" class="secondary">Create account</button></div><div id="nameWrap" class="hidden"><label>Your name</label><input id="name" placeholder="Your name"></div><label>Email</label><input id="email" type="email" placeholder="you@example.com"><label>Password (minimum 8 characters)</label><div class="password-wrap"><input id="password" type="password" placeholder="Password" minlength="8" autocomplete="current-password" required><button type="button" id="togglePassword" class="toggle-password" aria-label="Show password" title="Show password">👁️</button></div><button id="authSubmit" type="button">Sign in</button><p id="authMsg" class="small"></p></section>
-<div id="app" class="layout hidden"><aside class="panel nav"><div class="tile"><b id="userName">Student</b><div id="planLabel" class="small">Free plan</div></div><button data-page="solver">💡 Solve a doubt</button><button data-page="history">🕘 My history</button><button data-page="plans">⭐ Plans</button><button data-page="admin" id="adminNav" class="hidden">🛠 Admin dashboard</button><button id="logout" class="secondary">↪ Sign out</button><p class="small">Created by Prince Kumar</p></aside>
+.row{display:flex;gap:10px}
+.row>*{flex:1}
+.hidden{display:none!important}
+.result{white-space:pre-wrap;line-height:1.65;background:#0d1527;border:1px solid var(--line);padding:15px;border-radius:12px;margin-top:14px;min-height:65px}
+.tile{padding:13px;border-radius:12px;background:var(--panel2);margin:8px 0}
+.small{font-size:12px;color:var(--muted)}
+.credit{text-align:center;color:var(--muted);font-size:12px;margin:25px}
+.badge{display:inline-block;border:1px solid #536487;border-radius:30px;padding:4px 9px;font-size:11px;color:var(--cyan)}
+.history-item{border-bottom:1px solid var(--line);padding:12px 0}
+.price{font-size:25px;font-weight:800}
+.voice{display:flex;gap:6px;flex-wrap:wrap}
+@media(max-width:760px){
+.layout{grid-template-columns:1fr}
+.nav{display:grid;grid-template-columns:repeat(2,1fr);gap:5px}
+.row{display:block}
+header{padding:13px 16px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="brand">✦ Study<span>Buddy</span> AI</div>
+<div id="who" class="small">Your learning companion</div>
+</header>
+
+<main>
+
+<section class="hero">
+<h1>Every doubt deserves a <span style="color:var(--cyan)">clear answer.</span></h1>
+<p class="muted">Learn step by step, with photo and voice support.</p>
+</section>
+
+<section id="auth" class="panel" style="max-width:480px;margin:22px auto">
+<h2>Welcome to StudyBuddy</h2>
+<p class="muted">Sign in or create your student account.</p>
+
+<div class="row">
+<button id="loginTab">Sign in</button>
+<button id="registerTab" class="secondary">Create account</button>
+</div>
+
+<div id="nameWrap" class="hidden">
+<label>Your name</label>
+<input id="name" placeholder="Your name">
+</div>
+
+<label>Email</label>
+<input id="email" type="email" placeholder="you@example.com">
+
+<label>Password (minimum 8 characters)</label>
+
+<div class="password-wrap">
+<input id="password" type="password" placeholder="Password" minlength="8" autocomplete="current-password" required>
+<button type="button" id="togglePassword" class="toggle-password" aria-label="Show password" title="Show password">👁️</button>
+</div>
+
+<button id="authSubmit" type="button">Sign in</button>
+<p id="authMsg" class="small"></p>
+</section>
+
+<div id="app" class="layout hidden">
+
+<aside class="panel nav">
+
+<div class="tile">
+<b id="userName">Student</b>
+<div id="planLabel" class="small">Free plan</div>
+</div>
+
+<button data-page="solver">💡 Solve a doubt</button>
+<button data-page="history">🕘 My history</button>
+<button data-page="plans">⭐ Plans</button>
+<button data-page="admin" id="adminNav" class="hidden">🛠 Admin dashboard</button>
+<button id="logout" class="secondary">↪ Sign out</button>
+
+<p class="small">Created by Prince Kumar</p>
+</aside>
+
 <section class="panel">
-<div id="solver" class="page"><h2>AI Doubt Solver</h2><div class="row"><div><label>Subject</label><select id="subject"><option>General</option><option>Mathematics</option><option>Physics</option><option>Chemistry</option><option>Biology</option><option>English</option><option>History</option><option>Geography</option><option>Computer Science</option><option>Other</option></select></div><div><label>Level</label><select id="level"><option>School</option><option>Class 9–10</option><option>Class 11–12</option><option>JEE Main</option><option>JEE Advanced</option><option>NEET</option><option>College</option></select></div><div><label>Language</label><select id="language"><option>English</option><option>Hindi</option><option>Hinglish</option></select></div></div><label>Your question</label><textarea id="question" placeholder="Type a question, or tap the microphone to dictate..."></textarea><div class="voice"><button id="mic" class="secondary">🎙 Dictate question</button><button id="speak" class="secondary">🔊 Read answer aloud</button><button id="stopSpeak" class="secondary">⏹ Stop voice</button></div><label>Attach question photo (max 8 MB)</label><input id="image" type="file" accept="image/*"><button id="solve">✨ Solve my doubt</button><span id="solveMsg" class="small"></span><div id="result" class="result muted">Your step-by-step explanation will appear here.</div><div><button class="secondary" id="practice">Create practice questions</button><button class="secondary" id="quiz">Start a quiz</button></div></div>
-<div id="history" class="page hidden"><h2>My doubt history</h2><p class="muted small">Your latest 50 solved doubts are saved to your account.</p><div id="historyList"></div></div>
-<div id="plans" class="page hidden"><h2>Choose your learning plan</h2><p class="muted">Plans are displayed for product setup. Premium billing is not connected yet.</p><div class="row"><div class="tile"><h3>Free</h3><div class="price">₹0</div><p>Basic doubt solving and chat history.</p><span class="badge">Available</span></div><div class="tile"><h3>Premium</h3><div class="price">Coming soon</div><p>Proposed future benefits: higher usage limits, priority access and advanced learning tools.</p><span class="badge">Not yet for sale</span></div></div><p class="small">No payment is collected by this demo. An adult account owner should configure any future payment provider and terms.</p></div>
-<div id="admin" class="page hidden"><h2>Admin dashboard</h2><div id="adminStats" class="tile">Loading admin data…</div><div id="adminUsers"></div></div>
-</section></div><p class="credit">© 2026 StudyBuddy AI · Created by <b>Prince Kumar</b></p></main>
+
+<div id="solver" class="page">
+
+<h2>AI Doubt Solver</h2>
+
+<div class="row">
+
+<div>
+<label>Subject</label>
+<select id="subject">
+<option>General</option>
+<option>Mathematics</option>
+<option>Physics</option>
+<option>Chemistry</option>
+<option>Biology</option>
+<option>English</option>
+<option>History</option>
+<option>Geography</option>
+<option>Computer Science</option>
+<option>Other</option>
+</select>
+</div>
+
+<div>
+<label>Level</label>
+<select id="level">
+<option>School</option>
+<option>Class 9–10</option>
+<option>Class 11–12</option>
+<option>JEE Main</option>
+<option>JEE Advanced</option>
+<option>NEET</option>
+<option>College</option>
+</select>
+</div>
+
+<div>
+<label>Language</label>
+<select id="language">
+<option>English</option>
+<option>Hindi</option>
+<option>Hinglish</option>
+</select>
+</div>
+
+</div>
+
+<label>Your question</label>
+<textarea id="question" placeholder="Type a question, or tap the microphone to dictate..."></textarea>
+
+<div class="voice">
+<button id="mic" class="secondary">🎙 Dictate question</button>
+<button id="speak" class="secondary">🔊 Read answer aloud</button>
+<button id="stopSpeak" class="secondary">⏹ Stop voice</button>
+</div>
+
+<label>Attach question photo (max 8 MB)</label>
+<input id="image" type="file" accept="image/*">
+
+<button id="solve">✨ Solve my doubt</button>
+<span id="solveMsg" class="small"></span>
+
+<div id="result" class="result muted">Your step-by-step explanation will appear here.</div>
+
+<div>
+<button class="secondary" id="practice">Create practice questions</button>
+<button class="secondary" id="quiz">Start a quiz</button>
+</div>
+
+</div>
+
+<div id="history" class="page hidden">
+<h2>My doubt history</h2>
+<p class="muted small">Your latest 50 solved doubts are saved to your account.</p>
+<div id="historyList"></div>
+</div>
+
+<div id="plans" class="page hidden">
+<h2>Choose your learning plan</h2>
+<p class="muted">Plans are displayed for product setup. Premium billing is not connected yet.</p>
+
+<div class="row">
+
+<div class="tile">
+<h3>Free</h3>
+<div class="price">₹0</div>
+<p>Basic doubt solving and chat history.</p>
+<span class="badge">Available</span>
+</div>
+
+<div class="tile">
+<h3>Premium</h3>
+<div class="price">Coming soon</div>
+<p>Proposed future benefits: higher usage limits, priority access and advanced learning tools.</p>
+<span class="badge">Not yet for sale</span>
+</div>
+
+</div>
+
+<p class="small">No payment is collected by this demo. An adult account owner should configure any future payment provider and terms.</p>
+</div>
+
+<div id="admin" class="page hidden">
+<h2>Admin dashboard</h2>
+<div id="adminStats" class="tile">Loading admin data…</div>
+<div id="adminUsers"></div>
+</div>
+
+</section>
+</div>
+
+<p class="credit">© 2026 StudyBuddy AI · Created by <b>Prince Kumar</b></p>
+
+</main>
+
 <script>
 let token=localStorage.getItem("sb_token"), currentUser=null, mode="login", recognition=null;
+
 const $=id=>document.getElementById(id);
-async function api(path,opts={}){opts.headers={...(opts.headers||{}),...(token?{Authorization:"Bearer "+token}:{})};return fetch(path,opts)}
-function showPage(p){document.querySelectorAll(".page").forEach(x=>x.classList.add("hidden"));$(p).classList.remove("hidden");if(p==="history")loadHistory();if(p==="admin")loadAdmin()}
-function setMode(m){mode=m;$("nameWrap").classList.toggle("hidden",m!=="register");$("authSubmit").textContent=m==="login"?"Sign in":"Create account";$("loginTab").className=m==="login"?"":"secondary";$("registerTab").className=m==="register"?"":"secondary"}
-$("loginTab").onclick=()=>setMode("login");$("registerTab").onclick=()=>setMode("register");
-$("togglePassword").onclick=()=>{const field=$("password"),btn=$("togglePassword");const showing=field.type==="password";field.type=showing?"text":"password";btn.textContent=showing?"🙈":"👁️";btn.setAttribute("aria-label",showing?"Hide password":"Show password");btn.title=showing?"Hide password":"Show password"};
-$("authSubmit").onclick=async()=>{try{let r=await fetch("/api/"+(mode==="login"?"login":"register"),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:$("name").value,email:$("email").value,password:$("password").value})});let d=await r.json();if(!r.ok)throw Error(d.error);token=d.token;localStorage.setItem("sb_token",token);await boot()}catch(e){$("authMsg").textContent=e.message}};
-async function boot(){if(!token)return;try{let r=await api("/api/me");if(!r.ok)throw Error();let d=await r.json();currentUser=d.user;$("auth").classList.add("hidden");$("app").classList.remove("hidden");$("userName").textContent=d.user.name;$("who").textContent=d.user.email;$("planLabel").textContent=d.user.plan.toUpperCase()+" · "+d.user.role;$("adminNav").classList.toggle("hidden",d.user.role!=="admin");showPage("solver")}catch{token=null;localStorage.removeItem("sb_token");$("auth").classList.remove("hidden")}}
+
+async function api(path,opts={}){
+opts.headers={...(opts.headers||{}),...(token?{Authorization:"Bearer "+token}:{})};
+return fetch(path,opts);
+}
+
+function showPage(p){
+document.querySelectorAll(".page").forEach(x=>x.classList.add("hidden"));
+$(p).classList.remove("hidden");
+if(p==="history")loadHistory();
+if(p==="admin")loadAdmin();
+}
+
+function setMode(m){
+mode=m;
+$("nameWrap").classList.toggle("hidden",m!=="register");
+$("authSubmit").textContent=m==="login"?"Sign in":"Create account";
+$("loginTab").className=m==="login"?"":"secondary";
+$("registerTab").className=m==="register"?"":"secondary";
+}
+
+$("loginTab").onclick=()=>setMode("login");
+$("registerTab").onclick=()=>setMode("register");
+
+$("togglePassword").onclick=()=>{
+const field=$("password"),btn=$("togglePassword");
+const showing=field.type==="password";
+field.type=showing?"text":"password";
+btn.textContent=showing?"🙈":"👁️";
+btn.setAttribute("aria-label",showing?"Hide password":"Show password");
+btn.title=showing?"Hide password":"Show password";
+};
+
+$("authSubmit").onclick=async()=>{
+try{
+let r=await fetch("/api/"+(mode==="login"?"login":"register"),{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({
+name:$("name").value,
+email:$("email").value,
+password:$("password").value
+})
+});
+
+let d=await r.json();
+if(!r.ok)throw Error(d.error);
+
+token=d.token;
+localStorage.setItem("sb_token",token);
+await boot();
+
+}catch(e){
+$("authMsg").textContent=e.message;
+}
+};
+
+async function boot(){
+if(!token)return;
+
+try{
+let r=await api("/api/me");
+if(!r.ok)throw Error();
+
+let d=await r.json();
+currentUser=d.user;
+
+$("auth").classList.add("hidden");
+$("app").classList.remove("hidden");
+$("userName").textContent=d.user.name;
+$("who").textContent=d.user.email;
+$("planLabel").textContent=d.user.plan.toUpperCase()+" · "+d.user.role;
+$("adminNav").classList.toggle("hidden",d.user.role!=="admin");
+
+showPage("solver");
+
+}catch{
+token=null;
+localStorage.removeItem("sb_token");
+$("auth").classList.remove("hidden");
+}
+}
+
 document.querySelectorAll("[data-page]").forEach(b=>b.onclick=()=>showPage(b.dataset.page));
-$("logout").onclick=()=>{token=null;localStorage.removeItem("sb_token");location.reload()};
-$("solve").onclick=async()=>{let q=$("question").value.trim(),f=$("image").files[0];if(!q&&!f){$("solveMsg").textContent="Type a question or attach a photo.";return}if(f&&f.size>8*1024*1024){$("solveMsg").textContent="Image must be under 8 MB.";return}let fd=new FormData();fd.append("question",q);fd.append("subject",$("subject").value);fd.append("level",$("level").value);fd.append("language",$("language").value);if(f)fd.append("image",f);$("solve").disabled=true;$("solveMsg").textContent="Solving…";try{let r=await api("/api/solve",{method:"POST",body:fd}),d=await r.json();if(!r.ok)throw Error(d.error);$("result").textContent=d.answer;$("solveMsg").textContent="Saved to history."}catch(e){$("result").textContent=e.message;$("solveMsg").textContent=""}finally{$("solve").disabled=false}};
-async function loadHistory(){let r=await api("/api/history"),d=await r.json();$("historyList").innerHTML="";(d.history||[]).forEach(x=>{let el=document.createElement("div");el.className="history-item";let q=document.createElement("b");q.textContent=x.question;let a=document.createElement("p");a.className="small";a.textContent=x.answer.slice(0,260)+(x.answer.length>260?"…":"");let del=document.createElement("button");del.className="secondary";del.textContent="Delete";del.onclick=async()=>{await api("/api/history/"+x.id,{method:"DELETE"});loadHistory()};el.append(q,a,del);$("historyList").append(el)})}
-$("practice").onclick=()=>{$("question").value="Create 5 practice questions on the topic I am studying. Show answers only when I ask.";};$("quiz").onclick=()=>{$("question").value="Start a 5-question quiz on this topic. Ask one question at a time and wait for my answer.";};
-$("mic").onclick=()=>{let SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){$("solveMsg").textContent="Speech recognition isn't supported in this browser. Try Chrome.";return}recognition=new SR();recognition.lang=$("language").value==="Hindi"?"hi-IN":"en-IN";recognition.onresult=e=>$("question").value+=($("question").value?" ":"")+e.results[0][0].transcript;recognition.onerror=()=> $("solveMsg").textContent="Couldn't capture speech. Please try again.";recognition.start();$("solveMsg").textContent="Listening…"};
-$("speak").onclick=()=>{if(!("speechSynthesis"in window))return;let u=new SpeechSynthesisUtterance($("result").textContent);u.lang=$("language").value==="Hindi"?"hi-IN":"en-IN";speechSynthesis.speak(u)};$("stopSpeak").onclick=()=>speechSynthesis.cancel();
-async function loadAdmin(){let r=await api("/api/admin/overview"),d=await r.json();if(!r.ok){$("adminStats").textContent=d.error;return}$("adminStats").textContent=`Registered users: ${d.totalUsers} · Doubts solved: ${d.totalDoubts}`;$("adminUsers").innerHTML="";d.users.forEach(u=>{let row=document.createElement("div");row.className="history-item";let info=document.createElement("span");info.textContent=`${u.name} · ${u.email} · ${u.role} · ${u.plan}`;let sel=document.createElement("select");sel.innerHTML='<option value="free">Free</option><option value="premium">Premium</option>';sel.value=u.plan;sel.onchange=async()=>{await api("/api/admin/users/"+u.id+"/plan",{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({plan:sel.value})});loadAdmin()};row.append(info,sel);$("adminUsers").append(row)})}
-setMode("login");boot();
-</script></body></html>
+
+$("logout").onclick=()=>{
+token=null;
+localStorage.removeItem("sb_token");
+location.reload();
+};
+
+$("solve").onclick=async()=>{
+let q=$("question").value.trim(),f=$("image").files[0];
+
+if(!q&&!f){
+$("solveMsg").textContent="Type a question or attach a photo.";
+return;
+}
+
+if(f&&f.size>8*1024*1024){
+$("solveMsg").textContent="Image must be under 8 MB.";
+return;
+}
+
+let fd=new FormData();
+fd.append("question",q);
+fd.append("subject",$("subject").value);
+fd.append("level",$("level").value);
+fd.append("language",$("language").value);
+if(f)fd.append("image",f);
+
+$("solve").disabled=true;
+$("solveMsg").textContent="Solving…";
+
+try{
+let r=await api("/api/solve",{method:"POST",body:fd});
+let d=await r.json();
+
+if(!r.ok)throw Error(d.error);
+
+$("result").textContent=d.answer;
+$("solveMsg").textContent="Saved to history.";
+
+}catch(e){
+$("result").textContent=e.message;
+$("solveMsg").textContent="";
+
+}finally{
+$("solve").disabled=false;
+}
+};
+
+async function loadHistory(){
+let r=await api("/api/history");
+let d=await r.json();
+
+$("historyList").innerHTML="";
+
+(d.history||[]).forEach(x=>{
+let el=document.createElement("div");
+el.className="history-item";
+
+let q=document.createElement("b");
+q.textContent=x.question;
+
+let a=document.createElement("p");
+a.className="small";
+a.textContent=x.answer.slice(0,260)+(x.answer.length>260?"…":"");
+
+let del=document.createElement("button");
+del.className="secondary";
+del.textContent="Delete";
+
+del.onclick=async()=>{
+await api("/api/history/"+x.id,{method:"DELETE"});
+loadHistory();
+};
+
+el.append(q,a,del);
+$("historyList").append(el);
+});
+}
+
+$("practice").onclick=()=>{
+$("question").value="Create 5 practice questions on the topic I am studying. Show answers only when I ask.";
+};
+
+$("quiz").onclick=()=>{
+$("question").value="Start a 5-question quiz on this topic. Ask one question at a time and wait for my answer.";
+};
+
+$("mic").onclick=()=>{
+let SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+
+if(!SR){
+$("solveMsg").textContent="Speech recognition isn't supported in this browser. Try Chrome.";
+return;
+}
+
+recognition=new SR();
+recognition.lang=$("language").value==="Hindi"?"hi-IN":"en-IN";
+
+recognition.onresult=e=>{
+$("question").value+=($("question").value?" ":"")+e.results[0][0].transcript;
+};
+
+recognition.onerror=()=>{
+$("solveMsg").textContent="Couldn't capture speech. Please try again.";
+};
+
+recognition.start();
+$("solveMsg").textContent="Listening…";
+};
+
+$("speak").onclick=()=>{
+if(!("speechSynthesis"in window))return;
+let u=new SpeechSynthesisUtterance($("result").textContent);
+u.lang=$("language").value==="Hindi"?"hi-IN":"en-IN";
+speechSynthesis.speak(u);
+};
+
+$("stopSpeak").onclick=()=>speechSynthesis.cancel();
+
+async function loadAdmin(){
+let r=await api("/api/admin/overview");
+let d=await r.json();
+
+if(!r.ok){
+$("adminStats").textContent=d.error;
+return;
+}
+
+$("adminStats").textContent=`Registered users: ${d.totalUsers} · Doubts solved: ${d.totalDoubts}`;
+
+$("adminUsers").innerHTML="";
+
+d.users.forEach(u=>{
+let row=document.createElement("div");
+row.className="history-item";
+
+let info=document.createElement("span");
+info.textContent=`${u.name} · ${u.email} · ${u.role} · ${u.plan}`;
+
+let sel=document.createElement("select");
+sel.innerHTML='<option value="free">Free</option><option value="premium">Premium</option>';
+sel.value=u.plan;
+
+sel.onchange=async()=>{
+await api("/api/admin/users/"+u.id+"/plan",{
+method:"PATCH",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({plan:sel.value})
+});
+loadAdmin();
+};
+
+row.append(info,sel);
+$("adminUsers").append(row);
+});
+}
+
+setMode("login");
+boot();
+</script>
+
+</body>
+</html>
