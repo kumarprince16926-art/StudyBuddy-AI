@@ -3,479 +3,408 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#0b1020">
-<meta name="google-site-verification" content="CK4IL4JRzhoI3ce79TWgzjlEBmxU-_IlSHVUn_cIbc4" />
+<meta name="theme-color" content="#07100b">
+<meta name="google-site-verification" content="CK4IL4JRzhoI3ce79TWgzjlEBmxU-_IlSHVUn_cIbc4">
 <meta name="description" content="StudyBuddy AI helps students learn smarter with AI doubt solving, photo questions, voice support, notes and quizzes. Created by Prince Kumar.">
 <meta name="robots" content="index,follow">
-
 <title>StudyBuddy AI — by Prince Kumar</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-:root{--bg:#0b1020;--panel:#121a2d;--panel2:#19243c;--line:#263552;--text:#edf3ff;--muted:#9eacc7;--accent:#8b7cff;--cyan:#52d6d0}
-*{box-sizing:border-box}
-body{margin:0;background:radial-gradient(circle at 10% 0%,#22214d 0,transparent 35%),var(--bg);color:var(--text);font:15px system-ui,Arial}
-header{display:flex;align-items:center;justify-content:space-between;padding:16px 5%;border-bottom:1px solid var(--line);position:sticky;top:0;background:#0b1020ed;backdrop-filter:blur(12px);z-index:3}
-.brand{font-weight:850;font-size:20px}
-.brand span{color:var(--cyan)}
-main{max-width:1150px;margin:30px auto;padding:0 18px}
-.hero h1{font-size:clamp(28px,5vw,42px);margin:0 0 8px;letter-spacing:-1.3px}
-.muted{color:var(--muted)}
-.layout{display:grid;grid-template-columns:235px 1fr;gap:16px;margin-top:22px}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:17px}
-.nav button{display:block;width:100%;text-align:left;margin:6px 0;background:var(--panel2);color:var(--text);border:1px solid var(--line)}
-button{border:0;border-radius:11px;background:linear-gradient(100deg,var(--accent),#5d9bff);color:white;padding:11px 15px;font-weight:700;cursor:pointer;margin:5px 4px 5px 0}
-button.secondary{background:var(--panel2);border:1px solid var(--line);color:var(--text)}
-button:disabled{opacity:.55}
-input,select,textarea{width:100%;padding:11px;border-radius:10px;border:1px solid var(--line);background:#0d1527;color:var(--text);font:inherit;margin:5px 0 10px}
-textarea{min-height:120px;resize:vertical}
-.password-wrap{position:relative}
-.password-wrap input{padding-right:52px}
-.toggle-password{position:absolute;right:9px;top:7px;margin:5px 0;padding:7px 9px;background:transparent;border:0;color:var(--muted);font-size:19px;line-height:1}
-.toggle-password:hover{background:var(--panel2)}
-.row{display:flex;gap:10px}
-.row>*{flex:1}
-.hidden{display:none!important}
-.result{white-space:pre-wrap;line-height:1.65;background:#0d1527;border:1px solid var(--line);padding:15px;border-radius:12px;margin-top:14px;min-height:65px}
-.tile{padding:13px;border-radius:12px;background:var(--panel2);margin:8px 0}
-.small{font-size:12px;color:var(--muted)}
-.credit{text-align:center;color:var(--muted);font-size:12px;margin:25px}
-.badge{display:inline-block;border:1px solid #536487;border-radius:30px;padding:4px 9px;font-size:11px;color:var(--cyan)}
-.history-item{border-bottom:1px solid var(--line);padding:12px 0}
-.price{font-size:25px;font-weight:800}
-.voice{display:flex;gap:6px;flex-wrap:wrap}
-@media(max-width:760px){
-.layout{grid-template-columns:1fr}
-.nav{display:grid;grid-template-columns:repeat(2,1fr);gap:5px}
-.row{display:block}
-header{padding:13px 16px}
+:root{
+  --bg:#07100b;--bg2:#0a1510;--panel:#0d1912;--panel2:#112219;
+  --line:#1d3828;--line2:#294a36;--text:#eef4ef;--muted:#aebdb3;
+  --soft:#82988a;--accent:#2b965d;--accent2:#42b879;--cream:#f0f4ef;
+  --ink:#0a1710;--mono:"DM Mono",monospace;--sans:"DM Sans",system-ui,sans-serif;
+  --script:"Caveat","Segoe Print",cursive;
 }
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;min-height:100vh;color:var(--text);font:15px var(--sans);
+  background:
+    linear-gradient(115deg,transparent 0 24%,rgba(39,116,71,.045) 24.1%,transparent 24.3% 61%,rgba(39,116,71,.04) 61.1%,transparent 61.3%),
+    radial-gradient(ellipse at 12% 0%,#10291a 0,transparent 34%),var(--bg);
+}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+header{
+  min-height:66px;padding:14px max(5%,calc((100% - 1120px)/2));
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  border-bottom:1px solid var(--line);background:rgba(7,16,11,.92);
+  position:sticky;top:0;z-index:10;backdrop-filter:blur(14px)
+}
+.brand{font-weight:800;letter-spacing:-.7px;font-size:20px}
+.brand .brand-mark{color:var(--accent2);font-family:var(--mono);font-size:15px;margin-right:7px}
+.brand span{color:var(--accent2)}
+#who{font:11px var(--mono);letter-spacing:1px;color:var(--soft);text-align:right}
+main{max-width:1120px;margin:0 auto;padding:36px 22px 24px}
+.hero{padding:10px 0 26px;border-bottom:1px solid var(--line)}
+.eyebrow{font:11px var(--mono);letter-spacing:4px;text-transform:uppercase;color:var(--accent2);margin:0 0 18px}
+.hero h1{font:700 clamp(48px,9vw,76px)/.95 var(--script);letter-spacing:-1.8px;margin:0 0 17px;color:#f2f5f0}
+.hero h1 span{color:var(--accent2)}
+.hero-copy{max-width:690px;color:#b8c5bc;font-size:clamp(16px,2.4vw,19px);line-height:1.55;margin:0}
+.stats{display:flex;gap:48px;margin-top:28px}
+.stat strong{display:block;color:var(--accent2);font:500 34px var(--mono);letter-spacing:-2px}
+.stat span{display:block;color:#b8c5bc;font:11px var(--mono);letter-spacing:2px;margin-top:5px}
+.briefing{margin-top:25px;padding:17px 20px;border-left:3px solid var(--accent);background:rgba(4,12,7,.42);color:#b9c6bd;font:14px/1.8 var(--mono)}
+.briefing b{color:var(--accent2)}
+.layout{display:grid;grid-template-columns:1fr;gap:18px;margin-top:25px}
+.panel{min-width:0;background:rgba(10,22,14,.82);border:1px solid var(--line);border-radius:3px;padding:22px}
+.nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:12px 0;background:transparent;border:0;border-bottom:1px solid var(--line)}
+.nav .tile{margin:0 auto 0 0;min-width:155px;padding:8px 14px;border-left:2px solid var(--accent);background:transparent}
+.nav .tile b{font-size:14px}
+.nav button{width:auto;margin:0;padding:11px 15px;background:transparent;border:0;border-radius:0;color:#b9c6bd;font-weight:600}
+.nav button:hover,.nav button.active{color:#f2f5f0;background:rgba(43,150,93,.10);box-shadow:inset 0 -3px var(--accent)}
+.nav button.secondary{border:0;background:transparent;color:#b9c6bd}
+.nav p{margin:0 0 0 8px}
+.page h2,.auth-title{font:700 38px/.95 var(--script);margin:0 0 8px;color:var(--text)}
+.section-kicker{font:10px var(--mono);letter-spacing:3px;color:var(--accent2);text-transform:uppercase;margin:0 0 10px}
+.muted{color:var(--muted)}
+.panel-intro{font-size:14px;color:var(--muted);line-height:1.6;margin:0 0 22px}
+label{display:block;color:#d2ddd5;font:11px var(--mono);letter-spacing:1.5px;text-transform:uppercase;margin:14px 0 6px}
+input,select,textarea{
+  width:100%;padding:13px 14px;border-radius:2px;border:1px solid var(--line2);
+  background:#08130c;color:var(--text);outline:none;transition:border-color .2s,background .2s
+}
+input:focus,select:focus,textarea:focus{border-color:var(--accent2);background:#0b1910}
+input::placeholder,textarea::placeholder{color:#718477}
+textarea{min-height:130px;resize:vertical;line-height:1.6}
+.row{display:flex;gap:13px}
+.row>*{flex:1;min-width:0}
+button{
+  border:1px solid var(--accent);border-radius:2px;background:var(--accent);
+  color:#041109;padding:12px 17px;font:500 12px var(--mono);letter-spacing:1px;
+  text-transform:uppercase;transition:background .2s,border-color .2s,transform .2s
+}
+button:hover{background:var(--accent2);border-color:var(--accent2);transform:translateY(-1px)}
+button.secondary{background:transparent;border:1px solid var(--line2);color:#d2ddd5}
+button.secondary:hover{background:var(--panel2);border-color:var(--accent)}
+button:disabled{opacity:.55;cursor:not-allowed;transform:none}
+.hidden{display:none!important}
+.voice{display:flex;gap:8px;flex-wrap:wrap;margin:9px 0 18px}
+.voice button{font-size:10px;padding:10px 12px}
+.result{white-space:pre-wrap;line-height:1.75;background:#08130c;border:1px solid var(--line);padding:18px;border-radius:2px;margin-top:15px;min-height:90px;color:#dce8df}
+.action-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.tile{padding:17px;border:1px solid var(--line);background:var(--panel2);margin:9px 0}
+.small{font:11px/1.6 var(--mono);color:var(--soft)}
+.credit{text-align:center;color:#789080;font:10px var(--mono);letter-spacing:1.5px;margin:34px 0 12px}
+.badge{display:inline-block;border:1px solid var(--line2);padding:5px 9px;font:10px var(--mono);letter-spacing:1px;color:var(--accent2)}
+.history-item{border-bottom:1px solid var(--line);padding:15px 0}
+.history-item b{color:#e4eee7}
+.price{font:500 26px var(--mono);color:var(--accent2)}
+.password-wrap{position:relative}
+.password-wrap input{padding-right:58px}
+.toggle-password{position:absolute;right:7px;top:7px;margin:0;padding:8px;background:transparent;border:0;color:var(--muted);font-size:17px;letter-spacing:0}
+.toggle-password:hover{background:var(--panel2);transform:none}
+#auth{max-width:520px;margin:28px auto}
+#auth .auth-head{border-bottom:1px solid var(--line);padding-bottom:17px;margin-bottom:17px}
+.auth-actions{display:flex;gap:8px;margin:16px 0}
+.auth-actions button{flex:1}
+#authSubmit{width:100%;margin-top:8px}
+#authMsg{min-height:18px}
+.page{animation:appear .25s ease}
+@keyframes appear{from{opacity:.5;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:700px){
+  header{padding:13px 17px}
+  main{padding:25px 17px 18px}
+  .hero{padding-top:5px}
+  .hero h1{font-size:58px}
+  .stats{gap:35px}
+  .briefing{font-size:12px;padding:13px 15px}
+  .nav{gap:2px}
+  .nav .tile{width:100%;margin-bottom:7px}
+  .nav button{padding:10px 11px;font-size:10px}
+  .nav p{width:100%;margin:7px 5px 0}
+  .panel{padding:17px}
+  .row{display:block}
+  .row>*{width:100%}
+  .page h2,.auth-title{font-size:35px}
+}
+@media(min-width:900px){main{padding-top:44px}.panel{padding:27px}}
 </style>
 </head>
 
 <body>
-
 <header>
-<div class="brand">✦ Study<span>Buddy</span> AI</div>
-<div id="who" class="small">Your learning companion</div>
+  <div class="brand"><span class="brand-mark">✳</span>StudyBuddy <span>AI</span></div>
+  <div id="who">YOUR LEARNING COMPANION</div>
 </header>
 
 <main>
-
 <section class="hero">
-<h1>Every doubt deserves a <span style="color:var(--cyan)">clear answer.</span></h1>
-<p class="muted">Learn step by step, with photo and voice support.</p>
+  <p class="eyebrow">• OPERATION LEARNING · EST. 2026</p>
+  <h1>StudyBuddy <span>AI</span></h1>
+  <p class="hero-copy">Every doubt deserves a clear answer. Learn step by step, with photo and voice support.</p>
+  <div class="stats">
+    <div class="stat"><strong>AI</strong><span>YOUR STUDY PARTNER</span></div>
+    <div class="stat"><strong>24/7</strong><span>READY TO HELP</span></div>
+  </div>
+  <div class="briefing"><b>Briefing note:</b> Your personal learning companion for classes 6 to 12 and college. Ask questions, explore concepts and learn at your own pace.</div>
 </section>
 
-<section id="auth" class="panel" style="max-width:480px;margin:22px auto">
-<h2>Welcome to StudyBuddy</h2>
-<p class="muted">Sign in or create your student account.</p>
-
-<div class="row">
-<button id="loginTab">Sign in</button>
-<button id="registerTab" class="secondary">Create account</button>
-</div>
-
-<div id="nameWrap" class="hidden">
-<label>Your name</label>
-<input id="name" placeholder="Your name">
-</div>
-
-<label>Email</label>
-<input id="email" type="email" placeholder="you@example.com">
-
-<label>Password (minimum 8 characters)</label>
-
-<div class="password-wrap">
-<input id="password" type="password" placeholder="Password" minlength="8" autocomplete="current-password" required>
-<button type="button" id="togglePassword" class="toggle-password" aria-label="Show password" title="Show password">👁️</button>
-</div>
-
-<button id="authSubmit" type="button">Sign in</button>
-<p id="authMsg" class="small"></p>
+<section id="auth" class="panel">
+  <div class="auth-head">
+    <p class="section-kicker">STUDENT ACCESS · WELCOME</p>
+    <h2 class="auth-title">Enter your Study Room</h2>
+    <p class="panel-intro">Sign in or create your student account to continue learning.</p>
+  </div>
+  <div class="auth-actions">
+    <button id="loginTab">Sign in</button>
+    <button id="registerTab" class="secondary">Create account</button>
+  </div>
+  <div id="nameWrap" class="hidden">
+    <label>Your name</label>
+    <input id="name" placeholder="Your name" autocomplete="name">
+  </div>
+  <label>Email address</label>
+  <input id="email" type="email" placeholder="you@example.com" autocomplete="email">
+  <label>Password · minimum 8 characters</label>
+  <div class="password-wrap">
+    <input id="password" type="password" placeholder="Password" minlength="8" autocomplete="current-password" required>
+    <button type="button" id="togglePassword" class="toggle-password" aria-label="Show password" title="Show password">👁</button>
+  </div>
+  <button id="authSubmit" type="button">Sign in →</button>
+  <p id="authMsg" class="small"></p>
 </section>
 
 <div id="app" class="layout hidden">
+  <aside class="panel nav">
+    <div class="tile"><b id="userName">Student</b><div id="planLabel" class="small">FREE PLAN</div></div>
+    <button data-page="solver" class="active">✳ Solve a doubt</button>
+    <button data-page="history">My history</button>
+    <button data-page="plans">Learning plans</button>
+    <button data-page="admin" id="adminNav" class="hidden">Admin dashboard</button>
+    <button id="logout" class="secondary">Sign out ↗</button>
+    <p class="small">CREATED BY PRINCE KUMAR</p>
+  </aside>
 
-<aside class="panel nav">
+  <section class="panel">
+    <div id="solver" class="page">
+      <p class="section-kicker">ASK · UNDERSTAND · LEARN</p>
+      <h2>AI Doubt Solver</h2>
+      <p class="panel-intro">Share a question in text or upload a photo. Your AI tutor will explain it step by step.</p>
+      <div class="row">
+        <div><label>Subject</label><select id="subject">
+          <option>General</option><option>Mathematics</option><option>Physics</option><option>Chemistry</option><option>Biology</option><option>English</option><option>History</option><option>Geography</option><option>Computer Science</option><option>Other</option>
+        </select></div>
+        <div><label>Learning level</label><select id="level">
+          <option>School</option><option>Class 6–8</option><option>Class 9–10</option><option>Class 11–12</option><option>JEE Main</option><option>JEE Advanced</option><option>NEET</option><option>College</option>
+        </select></div>
+        <div><label>Language</label><select id="language"><option>English</option><option>Hindi</option><option>Hinglish</option></select></div>
+      </div>
+      <label>Your question</label>
+      <textarea id="question" placeholder="Type your question here, or use the microphone to dictate..."></textarea>
+      <div class="voice">
+        <button id="mic" class="secondary">🎙 Dictate question</button>
+        <button id="speak" class="secondary">🔊 Read answer</button>
+        <button id="stopSpeak" class="secondary">⏹ Stop voice</button>
+      </div>
+      <label>Attach a question photo · max 8 MB</label>
+      <input id="image" type="file" accept="image/*">
+      <div class="action-row">
+        <button id="solve">Solve my doubt →</button>
+        <span id="solveMsg" class="small"></span>
+      </div>
+      <div id="result" class="result muted">Your step-by-step explanation will appear here.</div>
+      <div class="action-row">
+        <button class="secondary" id="practice">Create practice questions</button>
+        <button class="secondary" id="quiz">Start a quiz</button>
+      </div>
+    </div>
 
-<div class="tile">
-<b id="userName">Student</b>
-<div id="planLabel" class="small">Free plan</div>
+    <div id="history" class="page hidden">
+      <p class="section-kicker">YOUR LEARNING RECORD</p><h2>My doubt history</h2>
+      <p class="panel-intro">Your latest 50 solved doubts are saved to your account.</p>
+      <div id="historyList"></div>
+    </div>
+
+    <div id="plans" class="page hidden">
+      <p class="section-kicker">LEARN AT YOUR PACE</p><h2>Learning plans</h2>
+      <p class="panel-intro">Plan information for StudyBuddy AI.</p>
+      <div class="row">
+        <div class="tile"><p class="section-kicker">START HERE</p><h3>Free</h3><div class="price">₹0</div><p class="muted">Basic doubt solving and chat history.</p><span class="badge">AVAILABLE</span></div>
+        <div class="tile"><p class="section-kicker">MORE TO EXPLORE</p><h3>Premium</h3><div class="price">Coming soon</div><p class="muted">Proposed future benefits: higher usage limits, priority access and advanced learning tools.</p><span class="badge">NOT YET FOR SALE</span></div>
+      </div>
+      <p class="small">No payment is collected by this demo. An adult account owner should configure any future payment provider and terms.</p>
+    </div>
+
+    <div id="admin" class="page hidden">
+      <p class="section-kicker">CONTROL ROOM</p><h2>Admin dashboard</h2>
+      <div id="adminStats" class="tile">Loading admin data…</div><div id="adminUsers"></div>
+    </div>
+  </section>
 </div>
 
-<button data-page="solver">💡 Solve a doubt</button>
-<button data-page="history">🕘 My history</button>
-<button data-page="plans">⭐ Plans</button>
-<button data-page="admin" id="adminNav" class="hidden">🛠 Admin dashboard</button>
-<button id="logout" class="secondary">↪ Sign out</button>
-
-<p class="small">Created by Prince Kumar</p>
-</aside>
-
-<section class="panel">
-
-<div id="solver" class="page">
-
-<h2>AI Doubt Solver</h2>
-
-<div class="row">
-
-<div>
-<label>Subject</label>
-<select id="subject">
-<option>General</option>
-<option>Mathematics</option>
-<option>Physics</option>
-<option>Chemistry</option>
-<option>Biology</option>
-<option>English</option>
-<option>History</option>
-<option>Geography</option>
-<option>Computer Science</option>
-<option>Other</option>
-</select>
-</div>
-
-<div>
-<label>Level</label>
-<select id="level">
-<option>School</option>
-<option>Class 9–10</option>
-<option>Class 11–12</option>
-<option>JEE Main</option>
-<option>JEE Advanced</option>
-<option>NEET</option>
-<option>College</option>
-</select>
-</div>
-
-<div>
-<label>Language</label>
-<select id="language">
-<option>English</option>
-<option>Hindi</option>
-<option>Hinglish</option>
-</select>
-</div>
-
-</div>
-
-<label>Your question</label>
-<textarea id="question" placeholder="Type a question, or tap the microphone to dictate..."></textarea>
-
-<div class="voice">
-<button id="mic" class="secondary">🎙 Dictate question</button>
-<button id="speak" class="secondary">🔊 Read answer aloud</button>
-<button id="stopSpeak" class="secondary">⏹ Stop voice</button>
-</div>
-
-<label>Attach question photo (max 8 MB)</label>
-<input id="image" type="file" accept="image/*">
-
-<button id="solve">✨ Solve my doubt</button>
-<span id="solveMsg" class="small"></span>
-
-<div id="result" class="result muted">Your step-by-step explanation will appear here.</div>
-
-<div>
-<button class="secondary" id="practice">Create practice questions</button>
-<button class="secondary" id="quiz">Start a quiz</button>
-</div>
-
-</div>
-
-<div id="history" class="page hidden">
-<h2>My doubt history</h2>
-<p class="muted small">Your latest 50 solved doubts are saved to your account.</p>
-<div id="historyList"></div>
-</div>
-
-<div id="plans" class="page hidden">
-<h2>Choose your learning plan</h2>
-<p class="muted">Plans are displayed for product setup. Premium billing is not connected yet.</p>
-
-<div class="row">
-
-<div class="tile">
-<h3>Free</h3>
-<div class="price">₹0</div>
-<p>Basic doubt solving and chat history.</p>
-<span class="badge">Available</span>
-</div>
-
-<div class="tile">
-<h3>Premium</h3>
-<div class="price">Coming soon</div>
-<p>Proposed future benefits: higher usage limits, priority access and advanced learning tools.</p>
-<span class="badge">Not yet for sale</span>
-</div>
-
-</div>
-
-<p class="small">No payment is collected by this demo. An adult account owner should configure any future payment provider and terms.</p>
-</div>
-
-<div id="admin" class="page hidden">
-<h2>Admin dashboard</h2>
-<div id="adminStats" class="tile">Loading admin data…</div>
-<div id="adminUsers"></div>
-</div>
-
-</section>
-</div>
-
-<p class="credit">© 2026 StudyBuddy AI · Created by <b>Prince Kumar</b></p>
-
+<p class="credit">© 2026 STUDYBUDDY AI · CREATED BY PRINCE KUMAR</p>
 </main>
 
 <script>
-let token=localStorage.getItem("sb_token"), currentUser=null, mode="login", recognition=null;
-
+let token=localStorage.getItem("sb_token"),currentUser=null,mode="login",recognition=null;
 const $=id=>document.getElementById(id);
 
 async function api(path,opts={}){
-opts.headers={...(opts.headers||{}),...(token?{Authorization:"Bearer "+token}:{})};
-return fetch(path,opts);
+  opts.headers={...(opts.headers||{}),...(token?{Authorization:"Bearer "+token}:{})};
+  return fetch(path,opts);
 }
 
 function showPage(p){
-document.querySelectorAll(".page").forEach(x=>x.classList.add("hidden"));
-$(p).classList.remove("hidden");
-if(p==="history")loadHistory();
-if(p==="admin")loadAdmin();
+  document.querySelectorAll(".page").forEach(x=>x.classList.add("hidden"));
+  $(p).classList.remove("hidden");
+  document.querySelectorAll("[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===p));
+  if(p==="history")loadHistory();
+  if(p==="admin")loadAdmin();
 }
 
 function setMode(m){
-mode=m;
-$("nameWrap").classList.toggle("hidden",m!=="register");
-$("authSubmit").textContent=m==="login"?"Sign in":"Create account";
-$("loginTab").className=m==="login"?"":"secondary";
-$("registerTab").className=m==="register"?"":"secondary";
+  mode=m;
+  $("nameWrap").classList.toggle("hidden",m!=="register");
+  $("authSubmit").textContent=m==="login"?"Sign in →":"Create account →";
+  $("loginTab").className=m==="login"?"":"secondary";
+  $("registerTab").className=m==="register"?"":"secondary";
+  $("password").autocomplete=m==="login"?"current-password":"new-password";
 }
-
 $("loginTab").onclick=()=>setMode("login");
 $("registerTab").onclick=()=>setMode("register");
 
 $("togglePassword").onclick=()=>{
-const field=$("password"),btn=$("togglePassword");
-const showing=field.type==="password";
-field.type=showing?"text":"password";
-btn.textContent=showing?"🙈":"👁️";
-btn.setAttribute("aria-label",showing?"Hide password":"Show password");
-btn.title=showing?"Hide password":"Show password";
+  const field=$("password"),btn=$("togglePassword");
+  const showing=field.type==="password";
+  field.type=showing?"text":"password";
+  btn.textContent=showing?"🙈":"👁";
+  btn.setAttribute("aria-label",showing?"Hide password":"Show password");
+  btn.title=showing?"Hide password":"Show password";
 };
 
 $("authSubmit").onclick=async()=>{
-try{
-let r=await fetch("/api/"+(mode==="login"?"login":"register"),{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({
-name:$("name").value,
-email:$("email").value,
-password:$("password").value
-})
-});
-
-let d=await r.json();
-if(!r.ok)throw Error(d.error);
-
-token=d.token;
-localStorage.setItem("sb_token",token);
-await boot();
-
-}catch(e){
-$("authMsg").textContent=e.message;
-}
+  $("authSubmit").disabled=true;
+  $("authMsg").textContent="Please wait…";
+  try{
+    const r=await fetch("/api/"+(mode==="login"?"login":"register"),{
+      method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({name:$("name").value,email:$("email").value,password:$("password").value})
+    });
+    const d=await r.json();
+    if(!r.ok)throw Error(d.error||"Unable to sign in.");
+    token=d.token;localStorage.setItem("sb_token",token);
+    await boot();
+  }catch(e){$("authMsg").textContent=e.message;}
+  finally{$("authSubmit").disabled=false;}
 };
 
 async function boot(){
-if(!token)return;
-
-try{
-let r=await api("/api/me");
-if(!r.ok)throw Error();
-
-let d=await r.json();
-currentUser=d.user;
-
-$("auth").classList.add("hidden");
-$("app").classList.remove("hidden");
-$("userName").textContent=d.user.name;
-$("who").textContent=d.user.email;
-$("planLabel").textContent=d.user.plan.toUpperCase()+" · "+d.user.role;
-$("adminNav").classList.toggle("hidden",d.user.role!=="admin");
-
-showPage("solver");
-
-}catch{
-token=null;
-localStorage.removeItem("sb_token");
-$("auth").classList.remove("hidden");
-}
+  if(!token)return;
+  try{
+    const r=await api("/api/me");
+    if(!r.ok)throw Error("Session expired");
+    const d=await r.json();currentUser=d.user;
+    $("auth").classList.add("hidden");$("app").classList.remove("hidden");
+    $("userName").textContent=d.user.name;
+    $("who").textContent=d.user.email;
+    $("planLabel").textContent=d.user.plan.toUpperCase()+" · "+d.user.role.toUpperCase();
+    $("adminNav").classList.toggle("hidden",d.user.role!=="admin");
+    showPage("solver");
+  }catch{
+    token=null;localStorage.removeItem("sb_token");
+    $("auth").classList.remove("hidden");$("app").classList.add("hidden");
+  }
 }
 
 document.querySelectorAll("[data-page]").forEach(b=>b.onclick=()=>showPage(b.dataset.page));
-
-$("logout").onclick=()=>{
-token=null;
-localStorage.removeItem("sb_token");
-location.reload();
-};
+$("logout").onclick=()=>{token=null;localStorage.removeItem("sb_token");location.reload();};
 
 $("solve").onclick=async()=>{
-let q=$("question").value.trim(),f=$("image").files[0];
-
-if(!q&&!f){
-$("solveMsg").textContent="Type a question or attach a photo.";
-return;
-}
-
-if(f&&f.size>8*1024*1024){
-$("solveMsg").textContent="Image must be under 8 MB.";
-return;
-}
-
-let fd=new FormData();
-fd.append("question",q);
-fd.append("subject",$("subject").value);
-fd.append("level",$("level").value);
-fd.append("language",$("language").value);
-if(f)fd.append("image",f);
-
-$("solve").disabled=true;
-$("solveMsg").textContent="Solving…";
-
-try{
-let r=await api("/api/solve",{method:"POST",body:fd});
-let d=await r.json();
-
-if(!r.ok)throw Error(d.error);
-
-$("result").textContent=d.answer;
-$("solveMsg").textContent="Saved to history.";
-
-}catch(e){
-$("result").textContent=e.message;
-$("solveMsg").textContent="";
-
-}finally{
-$("solve").disabled=false;
-}
+  const q=$("question").value.trim(),f=$("image").files[0];
+  if(!q&&!f){$("solveMsg").textContent="Type a question or attach a photo.";return;}
+  if(f&&f.size>8*1024*1024){$("solveMsg").textContent="Image must be under 8 MB.";return;}
+  const fd=new FormData();
+  fd.append("question",q);fd.append("subject",$("subject").value);
+  fd.append("level",$("level").value);fd.append("language",$("language").value);
+  if(f)fd.append("image",f);
+  $("solve").disabled=true;$("solveMsg").textContent="SOLVING…";
+  try{
+    const r=await api("/api/solve",{method:"POST",body:fd});
+    const d=await r.json();if(!r.ok)throw Error(d.error||"Could not solve this question.");
+    $("result").textContent=d.answer;$("solveMsg").textContent="SAVED TO HISTORY";
+  }catch(e){$("result").textContent=e.message;$("solveMsg").textContent="";}
+  finally{$("solve").disabled=false;}
 };
 
 async function loadHistory(){
-let r=await api("/api/history");
-let d=await r.json();
-
-$("historyList").innerHTML="";
-
-(d.history||[]).forEach(x=>{
-let el=document.createElement("div");
-el.className="history-item";
-
-let q=document.createElement("b");
-q.textContent=x.question;
-
-let a=document.createElement("p");
-a.className="small";
-a.textContent=x.answer.slice(0,260)+(x.answer.length>260?"…":"");
-
-let del=document.createElement("button");
-del.className="secondary";
-del.textContent="Delete";
-
-del.onclick=async()=>{
-await api("/api/history/"+x.id,{method:"DELETE"});
-loadHistory();
-};
-
-el.append(q,a,del);
-$("historyList").append(el);
-});
+  try{
+    const r=await api("/api/history"),d=await r.json();
+    if(!r.ok)throw Error(d.error||"Could not load history.");
+    $("historyList").innerHTML="";
+    (d.history||[]).forEach(x=>{
+      const el=document.createElement("div");el.className="history-item";
+      const q=document.createElement("b");q.textContent=x.question;
+      const a=document.createElement("p");a.className="small";
+      a.textContent=(x.answer||"").slice(0,260)+((x.answer||"").length>260?"…":"");
+      const del=document.createElement("button");del.className="secondary";del.textContent="Delete";
+      del.onclick=async()=>{await api("/api/history/"+x.id,{method:"DELETE"});loadHistory();};
+      el.append(q,a,del);$("historyList").append(el);
+    });
+    if(!(d.history||[]).length)$("historyList").textContent="No solved doubts yet. Start with your first question!";
+  }catch(e){$("historyList").textContent=e.message;}
 }
 
 $("practice").onclick=()=>{
-$("question").value="Create 5 practice questions on the topic I am studying. Show answers only when I ask.";
+  $("question").value="Create 5 practice questions on the topic I am studying. Show answers only when I ask.";
+  $("question").focus();
 };
-
 $("quiz").onclick=()=>{
-$("question").value="Start a 5-question quiz on this topic. Ask one question at a time and wait for my answer.";
+  $("question").value="Start a 5-question quiz on this topic. Ask one question at a time and wait for my answer.";
+  $("question").focus();
 };
 
 $("mic").onclick=()=>{
-let SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-
-if(!SR){
-$("solveMsg").textContent="Speech recognition isn't supported in this browser. Try Chrome.";
-return;
-}
-
-recognition=new SR();
-recognition.lang=$("language").value==="Hindi"?"hi-IN":"en-IN";
-
-recognition.onresult=e=>{
-$("question").value+=($("question").value?" ":"")+e.results[0][0].transcript;
-};
-
-recognition.onerror=()=>{
-$("solveMsg").textContent="Couldn't capture speech. Please try again.";
-};
-
-recognition.start();
-$("solveMsg").textContent="Listening…";
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){$("solveMsg").textContent="Speech recognition isn't supported in this browser. Try Chrome.";return;}
+  recognition=new SR();
+  recognition.lang=$("language").value==="Hindi"?"hi-IN":"en-IN";
+  recognition.onresult=e=>{$("question").value+=($("question").value?" ":"")+e.results[0][0].transcript;};
+  recognition.onerror=()=>{$("solveMsg").textContent="Couldn't capture speech. Please try again.";};
+  recognition.onend=()=>{$("solveMsg").textContent="";};
+  recognition.start();$("solveMsg").textContent="LISTENING…";
 };
 
 $("speak").onclick=()=>{
-if(!("speechSynthesis"in window))return;
-let u=new SpeechSynthesisUtterance($("result").textContent);
-u.lang=$("language").value==="Hindi"?"hi-IN":"en-IN";
-speechSynthesis.speak(u);
+  if(!("speechSynthesis"in window)){$("solveMsg").textContent="Voice playback isn't supported in this browser.";return;}
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance($("result").textContent);
+  u.lang=$("language").value==="Hindi"?"hi-IN":"en-IN";speechSynthesis.speak(u);
 };
-
-$("stopSpeak").onclick=()=>speechSynthesis.cancel();
+$("stopSpeak").onclick=()=>{if("speechSynthesis"in window)speechSynthesis.cancel();};
 
 async function loadAdmin(){
-let r=await api("/api/admin/overview");
-let d=await r.json();
-
-if(!r.ok){
-$("adminStats").textContent=d.error;
-return;
+  try{
+    const r=await api("/api/admin/overview"),d=await r.json();
+    if(!r.ok){$("adminStats").textContent=d.error||"Unable to load admin data.";return;}
+    $("adminStats").textContent=`REGISTERED USERS: ${d.totalUsers} · DOUBTS SOLVED: ${d.totalDoubts}`;
+    $("adminUsers").innerHTML="";
+    (d.users||[]).forEach(u=>{
+      const row=document.createElement("div");row.className="history-item";
+      const info=document.createElement("span");info.textContent=`${u.name} · ${u.email} · ${u.role} · ${u.plan}`;
+      const sel=document.createElement("select");
+      sel.innerHTML='<option value="free">Free</option><option value="premium">Premium</option>';
+      sel.value=u.plan;
+      sel.onchange=async()=>{
+        const update=await api("/api/admin/users/"+u.id+"/plan",{
+          method:"PATCH",headers:{"Content-Type":"application/json"},
+          body:JSON.stringify({plan:sel.value})
+        });
+        if(!update.ok){sel.value=u.plan;return;}
+        loadAdmin();
+      };
+      row.append(info,sel);$("adminUsers").append(row);
+    });
+  }catch(e){$("adminStats").textContent=e.message;}
 }
-
-$("adminStats").textContent=`Registered users: ${d.totalUsers} · Doubts solved: ${d.totalDoubts}`;
-
-$("adminUsers").innerHTML="";
-
-d.users.forEach(u=>{
-let row=document.createElement("div");
-row.className="history-item";
-
-let info=document.createElement("span");
-info.textContent=`${u.name} · ${u.email} · ${u.role} · ${u.plan}`;
-
-let sel=document.createElement("select");
-sel.innerHTML='<option value="free">Free</option><option value="premium">Premium</option>';
-sel.value=u.plan;
-
-sel.onchange=async()=>{
-await api("/api/admin/users/"+u.id+"/plan",{
-method:"PATCH",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({plan:sel.value})
-});
-loadAdmin();
-};
-
-row.append(info,sel);
-$("adminUsers").append(row);
-});
-}
-
 setMode("login");
 boot();
 </script>
-
 </body>
 </html>
