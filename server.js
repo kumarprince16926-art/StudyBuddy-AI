@@ -12,7 +12,7 @@ const { Pool } = pg;
 const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const publicDir = path.join(__dirname, "public");
-const PORT = process.env.PORT || 3000;
+const PORT = Number(process.env.PORT || 3000);
 
 const jwtSecret = process.env.JWT_SECRET;
 const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
@@ -29,6 +29,7 @@ const pool = new Pool({
 pool.on("error", err => console.error("Database error:", err));
 
 app.use(express.json({ limit: "1mb" }));
+app.use(express.urlencoded({ extended: true, limit: "1mb" }));
 app.use(express.static(publicDir));
 
 app.get("/health", (req, res) => {
@@ -45,15 +46,34 @@ app.get("/sitemap.xml", (req, res) => {
   res.sendFile(path.join(publicDir, "sitemap.xml"));
 });
 
+/*
+ * The current website sends the image as FormData field "image".
+ * Older website/bot integrations may send "photo".
+ * Accept both names so Multer does not return "Unexpected field".
+ */
 const upload = multer({
   storage: multer.memoryStorage(),
-  limits: { fileSize: 8 * 1024 * 1024 },
+  limits: { fileSize: 8 * 1024 * 1024, files: 1 },
   fileFilter: (req, file, cb) => {
     const allowed = ["image/jpeg", "image/png", "image/webp"];
     if (allowed.includes(file.mimetype)) return cb(null, true);
     cb(new Error("Only JPG, PNG and WEBP images are allowed."));
   }
 });
+
+function receiveQuestionImage(req, res, next) {
+  upload.fields([
+    { name: "image", maxCount: 1 },
+    { name: "photo", maxCount: 1 }
+  ])(req, res, err => {
+    if (err) return next(err);
+    req.questionImage =
+      req.files?.image?.[0] ||
+      req.files?.photo?.[0] ||
+      null;
+    next();
+  });
+}
 
 const MODEL = "@cf/google/gemma-4-26b-a4b-it";
 let cloudflareAI;
@@ -76,13 +96,15 @@ function ai() {
 }
 
 const TUTOR_PROMPT = `
-You are StudyBuddy AI, a friendly tutor for students in classes 6 to 12.
-Explain accurately in simple Hindi unless another language is requested.
-Use headings, short paragraphs and bullet points.
-Explain step by step.
-Give one real-life example and one practice question.
-Never invent facts.
-If an image is unclear, honestly ask for a clearer image.
+You are StudyBuddy AI, a friendly and accurate tutor for students in classes 6 to 12 and college.
+Follow the student's selected language. If no language is selected, use simple Hindi.
+Adapt the depth to the student's selected level.
+Explain concepts step by step using clear headings, short paragraphs and bullet points.
+When useful, give one real-life example and one practice question.
+For maths and science, show the reasoning and calculations clearly.
+Never invent facts, sources, marks, or exam claims.
+If an uploaded image or question is unclear, say what is unclear and ask for a clearer image.
+Be encouraging, respectful, age-appropriate, and focused on learning.
 `;
 
 async function askAI(system, question, maxTokens = 1500) {
@@ -136,7 +158,7 @@ async function initializeDatabase() {
 
     CREATE TABLE IF NOT EXISTS chats (
       id BIGSERIAL PRIMARY KEY,
-      user_id BIGINT REFERENCES users(id),
+      user_id BIGINT REFERENCES users(id) ON DELETE CASCADE,
       question TEXT NOT NULL,
       answer TEXT NOT NULL,
       subject TEXT,
@@ -145,7 +167,7 @@ async function initializeDatabase() {
 
     CREATE TABLE IF NOT EXISTS notes (
       id BIGSERIAL PRIMARY KEY,
-      user_id BIGINT REFERENCES users(id),
+      user_id BIGINT REFERENCES users(id) ON DELETE CASCADE,
       topic TEXT NOT NULL,
       subject TEXT,
       content TEXT NOT NULL,
@@ -154,7 +176,7 @@ async function initializeDatabase() {
 
     CREATE TABLE IF NOT EXISTS quiz_attempts (
       id BIGSERIAL PRIMARY KEY,
-      user_id BIGINT REFERENCES users(id),
+      user_id BIGINT REFERENCES users(id) ON DELETE CASCADE,
       topic TEXT NOT NULL,
       score INTEGER NOT NULL,
       total INTEGER NOT NULL,
@@ -183,7 +205,6 @@ app.post("/api/register", async (req, res) => {
       ? "admin" : "student";
 
     const hash = await bcrypt.hash(password, 12);
-
     const result = await pool.query(
       `INSERT INTO users(name,email,password_hash,role)
        VALUES($1,$2,$3,$4)
@@ -192,7 +213,6 @@ app.post("/api/register", async (req, res) => {
     );
 
     const user = result.rows[0];
-
     res.json({
       token: jwt.sign(user, jwtSecret, { expiresIn: "7d" }),
       user
@@ -217,7 +237,6 @@ app.post("/api/login", async (req, res) => {
       "SELECT * FROM users WHERE email=$1",
       [email]
     );
-
     const row = result.rows[0];
 
     if (!row || !(await bcrypt.compare(password, row.password_hash))) {
@@ -227,7 +246,7 @@ app.post("/api/login", async (req, res) => {
     }
 
     const user = {
-      id: Number(row.id),
+      id: String(row.id),
       name: row.name,
       email: row.email,
       role: row.role,
@@ -258,20 +277,21 @@ app.get("/api/me", auth, async (req, res) => {
 
     res.json({ user: result.rows[0] });
   } catch (err) {
-    console.error(err);
+    console.error("PROFILE:", err);
     res.status(500).json({ error: "Could not load profile." });
   }
 });
 
-// SOLVE DOUBT + PHOTO
-app.post("/api/solve", auth, upload.single("photo"), async (req, res) => {
+// SOLVE DOUBT + PHOTO (accepts both image and photo field names)
+app.post("/api/solve", auth, receiveQuestionImage, async (req, res) => {
   try {
     const question = String(req.body.question || "").trim();
     const subject = String(req.body.subject || "General");
     const level = String(req.body.level || "School");
     const language = String(req.body.language || "Hindi");
+    const imageFile = req.questionImage;
 
-    if (!question && !req.file) {
+    if (!question && !imageFile) {
       return res.status(400).json({
         error: "Enter a question or upload a photo."
       });
@@ -282,14 +302,14 @@ Subject: ${subject}
 Student level: ${level}
 Preferred language: ${language}
 Question: ${question || "Read and solve the attached image."}
-Explain step by step.
+Explain step by step at the selected learning level.
 `;
 
     let answer;
 
-    if (req.file) {
+    if (imageFile) {
       const imageData =
-        `data:${req.file.mimetype};base64,${req.file.buffer.toString("base64")}`;
+        `data:${imageFile.mimetype};base64,${imageFile.buffer.toString("base64")}`;
 
       const result = await ai().chat.completions.create({
         model: MODEL,
@@ -338,24 +358,37 @@ app.get("/api/history", auth, async (req, res) => {
        ORDER BY created_at DESC LIMIT 100`,
       [req.user.id]
     );
-
     res.json({ history: result.rows });
   } catch (err) {
-    console.error(err);
+    console.error("HISTORY:", err);
     res.status(500).json({ error: "Could not load history." });
   }
 });
 
-// DELETE CHAT HISTORY
+// DELETE ONE CHAT (used by the current website)
+app.delete("/api/history/:id", auth, async (req, res) => {
+  try {
+    const result = await pool.query(
+      "DELETE FROM chats WHERE id=$1 AND user_id=$2 RETURNING id",
+      [req.params.id, req.user.id]
+    );
+    if (!result.rowCount) {
+      return res.status(404).json({ error: "History item not found." });
+    }
+    res.json({ message: "History item deleted." });
+  } catch (err) {
+    console.error("DELETE HISTORY ITEM:", err);
+    res.status(500).json({ error: "Could not delete history item." });
+  }
+});
+
+// DELETE ALL CHAT HISTORY
 app.delete("/api/history", auth, async (req, res) => {
   try {
-    await pool.query(
-      "DELETE FROM chats WHERE user_id=$1",
-      [req.user.id]
-    );
+    await pool.query("DELETE FROM chats WHERE user_id=$1", [req.user.id]);
     res.json({ message: "Chat history deleted." });
   } catch (err) {
-    console.error(err);
+    console.error("DELETE HISTORY:", err);
     res.status(500).json({ error: "Could not delete history." });
   }
 });
@@ -365,14 +398,11 @@ app.post("/api/notes", auth, async (req, res) => {
   try {
     const topic = String(req.body.topic || "").trim();
     const subject = String(req.body.subject || "General");
-
-    if (!topic) {
-      return res.status(400).json({ error: "Enter a topic." });
-    }
+    if (!topic) return res.status(400).json({ error: "Enter a topic." });
 
     const content = await askAI(
       TUTOR_PROMPT,
-      `Create detailed study notes on ${topic}. Subject: ${subject}. Use simple Hindi.`,
+      `Create detailed study notes on ${topic}. Subject: ${subject}. Use the selected language if provided.`,
       1800
     );
 
@@ -381,10 +411,9 @@ app.post("/api/notes", auth, async (req, res) => {
        VALUES($1,$2,$3,$4) RETURNING *`,
       [req.user.id, topic, subject, content]
     );
-
     res.json({ note: result.rows[0] });
   } catch (err) {
-    console.error(err);
+    console.error("CREATE NOTE:", err);
     res.status(500).json({ error: "Could not create notes." });
   }
 });
@@ -397,10 +426,9 @@ app.get("/api/notes", auth, async (req, res) => {
        ORDER BY created_at DESC LIMIT 50`,
       [req.user.id]
     );
-
     res.json({ notes: result.rows });
   } catch (err) {
-    console.error(err);
+    console.error("GET NOTES:", err);
     res.status(500).json({ error: "Could not load notes." });
   }
 });
@@ -408,14 +436,16 @@ app.get("/api/notes", auth, async (req, res) => {
 // DELETE NOTE
 app.delete("/api/notes/:id", auth, async (req, res) => {
   try {
-    await pool.query(
-      "DELETE FROM notes WHERE id=$1 AND user_id=$2",
+    const result = await pool.query(
+      "DELETE FROM notes WHERE id=$1 AND user_id=$2 RETURNING id",
       [req.params.id, req.user.id]
     );
-
+    if (!result.rowCount) {
+      return res.status(404).json({ error: "Note not found." });
+    }
     res.json({ message: "Note deleted." });
   } catch (err) {
-    console.error(err);
+    console.error("DELETE NOTE:", err);
     res.status(500).json({ error: "Could not delete note." });
   }
 });
@@ -424,20 +454,16 @@ app.delete("/api/notes/:id", auth, async (req, res) => {
 app.post("/api/practice", auth, async (req, res) => {
   try {
     const topic = String(req.body.topic || "").trim();
-
-    if (!topic) {
-      return res.status(400).json({ error: "Enter a topic." });
-    }
+    if (!topic) return res.status(400).json({ error: "Enter a topic." });
 
     const questions = await askAI(
       TUTOR_PROMPT,
-      `Create 5 practice questions about ${topic}, with answers.`,
+      `Create 5 practice questions about ${topic}. Put the answers in a separate answer section.`,
       1500
     );
-
     res.json({ questions });
   } catch (err) {
-    console.error(err);
+    console.error("PRACTICE:", err);
     res.status(500).json({ error: "Could not create practice questions." });
   }
 });
@@ -446,21 +472,17 @@ app.post("/api/practice", auth, async (req, res) => {
 app.post("/api/quiz", auth, async (req, res) => {
   try {
     const topic = String(req.body.topic || "").trim();
-
-    if (!topic) {
-      return res.status(400).json({ error: "Enter a topic." });
-    }
+    if (!topic) return res.status(400).json({ error: "Enter a topic." });
 
     const quiz = await askAI(
       TUTOR_PROMPT,
       `Create a 5-question multiple-choice quiz about ${topic}.
-       Give four options A, B, C, D and mark the correct answer.`,
+       Give four options A, B, C, D. Put the answer key after all questions.`,
       1600
     );
-
     res.json({ quiz });
   } catch (err) {
-    console.error(err);
+    console.error("QUIZ:", err);
     res.status(500).json({ error: "Could not create quiz." });
   }
 });
@@ -472,8 +494,7 @@ app.post("/api/quiz/score", auth, async (req, res) => {
     const score = Number(req.body.score);
     const total = Number(req.body.total);
 
-    if (!Number.isInteger(score) ||
-        !Number.isInteger(total) ||
+    if (!Number.isInteger(score) || !Number.isInteger(total) ||
         total < 1 || score < 0 || score > total) {
       return res.status(400).json({ error: "Invalid quiz score." });
     }
@@ -483,10 +504,9 @@ app.post("/api/quiz/score", auth, async (req, res) => {
        VALUES($1,$2,$3,$4)`,
       [req.user.id, topic, score, total]
     );
-
     res.json({ message: "Score saved." });
   } catch (err) {
-    console.error(err);
+    console.error("SAVE QUIZ SCORE:", err);
     res.status(500).json({ error: "Could not save score." });
   }
 });
@@ -500,15 +520,14 @@ app.get("/api/quiz/history", auth, async (req, res) => {
        ORDER BY created_at DESC LIMIT 50`,
       [req.user.id]
     );
-
     res.json({ attempts: result.rows });
   } catch (err) {
-    console.error(err);
+    console.error("QUIZ HISTORY:", err);
     res.status(500).json({ error: "Could not load quiz history." });
   }
 });
 
-// ADMIN DASHBOARD
+// ADMIN SUMMARY (older endpoint retained)
 app.get("/api/admin", auth, admin, async (req, res) => {
   try {
     const [users, chats, notes] = await Promise.all([
@@ -516,15 +535,59 @@ app.get("/api/admin", auth, admin, async (req, res) => {
       pool.query("SELECT COUNT(*) FROM chats"),
       pool.query("SELECT COUNT(*) FROM notes")
     ]);
-
     res.json({
       users: Number(users.rows[0].count),
       doubtsSolved: Number(chats.rows[0].count),
       notesCreated: Number(notes.rows[0].count)
     });
   } catch (err) {
-    console.error(err);
+    console.error("ADMIN SUMMARY:", err);
     res.status(500).json({ error: "Could not load admin dashboard." });
+  }
+});
+
+// ADMIN OVERVIEW (endpoint used by redesigned website)
+app.get("/api/admin/overview", auth, admin, async (req, res) => {
+  try {
+    const [usersCount, doubtsCount, users] = await Promise.all([
+      pool.query("SELECT COUNT(*) FROM users"),
+      pool.query("SELECT COUNT(*) FROM chats"),
+      pool.query(
+        `SELECT id,name,email,role,plan
+         FROM users ORDER BY created_at DESC LIMIT 100`
+      )
+    ]);
+
+    res.json({
+      totalUsers: Number(usersCount.rows[0].count),
+      totalDoubts: Number(doubtsCount.rows[0].count),
+      users: users.rows
+    });
+  } catch (err) {
+    console.error("ADMIN OVERVIEW:", err);
+    res.status(500).json({ error: "Could not load admin overview." });
+  }
+});
+
+// ADMIN: UPDATE USER PLAN
+app.patch("/api/admin/users/:id/plan", auth, admin, async (req, res) => {
+  try {
+    const plan = String(req.body?.plan || "").toLowerCase();
+    if (!["free", "premium"].includes(plan)) {
+      return res.status(400).json({ error: "Plan must be free or premium." });
+    }
+
+    const result = await pool.query(
+      "UPDATE users SET plan=$1 WHERE id=$2 RETURNING id,name,email,role,plan",
+      [plan, req.params.id]
+    );
+    if (!result.rowCount) {
+      return res.status(404).json({ error: "User not found." });
+    }
+    res.json({ user: result.rows[0] });
+  } catch (err) {
+    console.error("ADMIN UPDATE PLAN:", err);
+    res.status(500).json({ error: "Could not update user plan." });
   }
 });
 
@@ -532,77 +595,58 @@ app.get("/api/admin", auth, admin, async (req, res) => {
    TELEGRAM BOT - TEXT + PHOTO SUPPORT
 ===================================== */
 
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 async function telegram(method, body = {}) {
-  if (!telegramToken) {
-    throw new Error("Telegram bot token missing.");
-  }
+  if (!telegramToken) throw new Error("Telegram bot token missing.");
 
   const response = await fetch(
     `https://api.telegram.org/bot${telegramToken}/${method}`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body)
+      body: JSON.stringify(body),
+      signal: AbortSignal.timeout(40000)
     }
   );
 
   const data = await response.json();
-
-  if (!data.ok) {
-    throw new Error(data.description || "Telegram API error");
+  if (!response.ok || !data.ok) {
+    throw new Error(data.description || `Telegram API error (${response.status})`);
   }
-
   return data.result;
 }
 
-/* DOWNLOAD TELEGRAM PHOTO */
-
 async function getTelegramImage(fileId) {
-  const file = await telegram("getFile", {
-    file_id: fileId
-  });
-
-  if (!file.file_path) {
-    throw new Error("Photo not found.");
-  }
-
-  if (file.file_size > 8 * 1024 * 1024) {
+  const file = await telegram("getFile", { file_id: fileId });
+  if (!file.file_path) throw new Error("Photo not found.");
+  if (file.file_size && file.file_size > 8 * 1024 * 1024) {
     throw new Error("Photo must be under 8 MB.");
   }
 
   const response = await fetch(
-    `https://api.telegram.org/file/bot${telegramToken}/${file.file_path}`
+    `https://api.telegram.org/file/bot${telegramToken}/${file.file_path}`,
+    { signal: AbortSignal.timeout(30000) }
   );
-
-  if (!response.ok) {
-    throw new Error("Photo download failed.");
-  }
+  if (!response.ok) throw new Error("Photo download failed.");
 
   const buffer = Buffer.from(await response.arrayBuffer());
-
   if (buffer.length > 8 * 1024 * 1024) {
     throw new Error("Photo must be under 8 MB.");
   }
 
   const extension = file.file_path.split(".").pop().toLowerCase();
-
   const mimeTypes = {
     jpg: "image/jpeg",
     jpeg: "image/jpeg",
     png: "image/png",
     webp: "image/webp"
   };
-
   const mime = mimeTypes[extension];
-
-  if (!mime) {
-    throw new Error("Only JPG, PNG and WEBP photos are supported.");
-  }
+  if (!mime) throw new Error("Only JPG, PNG and WEBP photos are supported.");
 
   return `data:${mime};base64,${buffer.toString("base64")}`;
 }
-
-/* AI RESPONSE FOR TELEGRAM */
 
 async function telegramAnswer(chatId, question, imageData = null) {
   const content = imageData
@@ -611,10 +655,7 @@ async function telegramAnswer(chatId, question, imageData = null) {
           type: "text",
           text: question || "Read and solve this photo step by step in simple Hindi."
         },
-        {
-          type: "image_url",
-          image_url: { url: imageData }
-        }
+        { type: "image_url", image_url: { url: imageData } }
       ]
     : question;
 
@@ -628,173 +669,48 @@ async function telegramAnswer(chatId, question, imageData = null) {
     temperature: 0.3
   });
 
-  const answer =
-    result.choices?.[0]?.message?.content || "Please try again.";
-
+  const answer = result.choices?.[0]?.message?.content || "Please try again.";
   const chunks = answer.match(/[\s\S]{1,4000}/g) || ["Please try again."];
 
   for (const chunk of chunks) {
-    await telegram("sendMessage", {
-      chat_id: chatId,
-      text: chunk
-    });
+    await telegram("sendMessage", { chat_id: chatId, text: chunk });
   }
 }
-
-/* START TELEGRAM BOT */
 
 let telegramRunning = false;
-
-async function startTelegramBot() {
-  if (!telegramToken || telegramRunning) return;
-
-  telegramRunning = true;
-
-  try {
-    await telegram("deleteWebhook", {
-      drop_pending_updates: false
-    });
-
-    let offset = 0;
-
-    console.log("StudyBuddy Telegram bot started.");
-
-    while (true) {
-      try {
-        const updates = await telegram("getUpdates", {
-          offset,
-          timeout: 25,
-          allowed_updates: ["message"]
-        });
-
-        for (const update of updates) {
-          offset = update.update_id + 1;
-
-          const message = update.message;
-          if (!message?.chat?.id) continue;
-
-          const chatId = message.chat.id;
-          const text = message.text?.trim() || "";
-
-          try {
-            if (text === "/start") {
-              await telegram("sendMessage", {
-                chat_id: chatId,
-                text:
-                  "🎓 Welcome to StudyBuddy AI!\n\n" +
-                  "Send your study question or upload a question photo.\n\n" +
-                  "I will explain step by step in simple Hindi."
-              });
-              continue;
-            }
-
-            if (text === "/help") {
-              await telegram("sendMessage", {
-                chat_id: chatId,
-                text:
-                  "📚 StudyBuddy AI Help\n\n" +
-                  "1. Send a text question.\n" +
-                  "2. Send a question photo.\n" +
-                  "3. Add a caption to your photo.\n\n" +
-                  "Photo limit: 8 MB.\n" +
-                  "Supported: JPG, PNG, WEBP."
-              });
-              continue;
-            }
-
-            const photo = message.photo?.length
-              ? message.photo[message.photo.length - 1]
-              : null;
-
-            const document = message.document;
-
-            const isImageDocument =
-              document?.mime_type &&
-              ["image/jpeg", "image/png", "image/webp"]
-                .includes(document.mime_type);
-
-            if (photo || isImageDocument) {
-              await telegram("sendChatAction", {
-                chat_id: chatId,
-                action: "typing"
-              });
-
-              const fileId = photo
-                ? photo.file_id
-                : document.file_id;
-
-              const imageData = await getTelegramImage(fileId);
-
-              await telegramAnswer(
-                chatId,
-                message.caption?.trim() ||
-                  "Read this photo and solve the question step by step.",
-                imageData
-              );
-
-              continue;
-            }
-
-            if (document) {
-              await telegram("sendMessage", {
-                chat_id: chatId,
-                text: "Please send a JPG, PNG or WEBP image."
-              });
-              continue;
-            }
-
-            if (text && !text.startsWith("/")) {
-              await telegram("sendChatAction", {
-                chat_id: chatId,
-                action: "typing"
-              });
-
-              await telegramAnswer(chatId, text);
-            }
-
-          } catch (err) {
-            console.error("Telegram message error:", err);
-
-            await telegram("sendMessage", {
-              chat_id: chatId,
-              text: "Sorry! Question solve nahi ho paya. Please try again."
-            }).catch(() => {});
-          }
-        }
-      } catch (err) {
-        console.error("Telegram polling error:", err.message);
-        await new Promise(resolve => setTimeout(resolve, 5000));
-      }
-    }
-  } catch (err) {
-    telegramRunning = false;
-    console.error("Telegram startup error:", err);
+    console.error("Telegram bot could not start:", err.message);
   }
 }
 
-// SERVER ERROR HANDLER
+// JSON error response for Multer and other request errors
 app.use((err, req, res, next) => {
-  console.error("SERVER ERROR:", err);
-
+  console.error("REQUEST ERROR:", err);
   if (res.headersSent) return next(err);
 
-  res.status(err.status || 500).json({
-    error: err.message || "Something went wrong."
-  });
+  const isUploadError =
+    err instanceof multer.MulterError ||
+    /image|photo|file|multipart|field/i.test(err.message || "");
+
+  res.status(err instanceof multer.MulterError && err.code === "LIMIT_FILE_SIZE" ? 413 : 400)
+    .json({
+      error: isUploadError
+        ? (err.code === "LIMIT_FILE_SIZE"
+            ? "Image must be under 8 MB."
+            : err.message || "Image upload failed.")
+        : "Invalid request."
+    });
 });
 
-// START SERVER
-async function startServer() {
-  await initializeDatabase();
-
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`StudyBuddy AI running on port ${PORT}`);
+// Start only after database is ready
+initializeDatabase()
+  .then(() => {
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`StudyBuddy AI running on port ${PORT}`);
+      if (telegramToken) startTelegramBot();
+      else console.log("Telegram bot disabled: TELEGRAM_BOT_TOKEN is not set.");
+    });
+  })
+  .catch(err => {
+    console.error("Startup failed:", err);
+    process.exit(1);
   });
-
-  startTelegramBot();
-}
-
-startServer().catch(err => {
-  console.error("STARTUP FAILED:", err);
-  process.exit(1);
-});
