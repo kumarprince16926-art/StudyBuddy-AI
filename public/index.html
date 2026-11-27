@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -5,37 +6,33 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#07100b">
 <meta name="google-site-verification" content="CK4IL4JRzhoI3ce79TWgzjlEBmxU-_IlSHVUn_cIbc4">
-<meta name="description" content="StudyBuddy AI helps students learn smarter with AI doubt solving, photo questions, voice support, notes and quizzes. Created by Prince Kumar.">
+<meta name="description" content="StudyBuddy AI helps students learn smarter with AI doubt solving, photo questions, voice support, notes, quizzes and personalized study planning. Created by Prince Kumar.">
 <meta name="robots" content="index,follow">
 <title>StudyBuddy AI — by Prince Kumar</title>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
 <style>
 :root{
-  --bg:#07100b;--bg2:#0a1510;--panel:#0d1912;--panel2:#112219;
-  --line:#1d3828;--line2:#294a36;--text:#eef4ef;--muted:#aebdb3;
-  --soft:#82988a;--accent:#2b965d;--accent2:#42b879;--cream:#f0f4ef;
-  --ink:#0a1710;--mono:"DM Mono",monospace;--sans:"DM Sans",system-ui,sans-serif;
-  --script:"Caveat","Segoe Print",cursive;
+--bg:#07100b;--bg2:#0a1510;--panel:#0d1912;--panel2:#112219;
+--line:#1d3828;--line2:#294a36;--text:#eef4ef;--muted:#aebdb3;
+--soft:#82988a;--accent:#2b965d;--accent2:#42b879;
+--mono:"DM Mono",monospace;--sans:"DM Sans",system-ui,sans-serif;
+--script:"Caveat","Segoe Print",cursive
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  margin:0;min-height:100vh;color:var(--text);font:15px var(--sans);
-  background:
-    linear-gradient(115deg,transparent 0 24%,rgba(39,116,71,.045) 24.1%,transparent 24.3% 61%,rgba(39,116,71,.04) 61.1%,transparent 61.3%),
-    radial-gradient(ellipse at 12% 0%,#10291a 0,transparent 34%),var(--bg);
+margin:0;min-height:100vh;color:var(--text);font:15px var(--sans);
+background:radial-gradient(ellipse at 12% 0%,#10291a 0,transparent 34%),var(--bg)
 }
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
 header{
-  min-height:66px;padding:14px max(5%,calc((100% - 1120px)/2));
-  display:flex;align-items:center;justify-content:space-between;gap:16px;
-  border-bottom:1px solid var(--line);background:rgba(7,16,11,.92);
-  position:sticky;top:0;z-index:10;backdrop-filter:blur(14px)
+min-height:66px;padding:14px max(5%,calc((100% - 1120px)/2));
+display:flex;align-items:center;justify-content:space-between;gap:16px;
+border-bottom:1px solid var(--line);background:rgba(7,16,11,.94);
+position:sticky;top:0;z-index:10;backdrop-filter:blur(14px)
 }
 .brand{font-weight:800;letter-spacing:-.7px;font-size:20px}
 .brand .brand-mark{color:var(--accent2);font-family:var(--mono);font-size:15px;margin-right:7px}
@@ -53,11 +50,11 @@ main{max-width:1120px;margin:0 auto;padding:36px 22px 24px}
 .briefing{margin-top:25px;padding:17px 20px;border-left:3px solid var(--accent);background:rgba(4,12,7,.42);color:#b9c6bd;font:14px/1.8 var(--mono)}
 .briefing b{color:var(--accent2)}
 .layout{display:grid;grid-template-columns:1fr;gap:18px;margin-top:25px}
-.panel{min-width:0;background:rgba(10,22,14,.82);border:1px solid var(--line);border-radius:3px;padding:22px}
+.panel{min-width:0;background:rgba(10,22,14,.88);border:1px solid var(--line);border-radius:4px;padding:22px}
 .nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:12px 0;background:transparent;border:0;border-bottom:1px solid var(--line)}
 .nav .tile{margin:0 auto 0 0;min-width:155px;padding:8px 14px;border-left:2px solid var(--accent);background:transparent}
 .nav .tile b{font-size:14px}
-.nav button{width:auto;margin:0;padding:11px 15px;background:transparent;border:0;border-radius:0;color:#b9c6bd;font-weight:600}
+.nav button{width:auto;margin:0;padding:11px 13px;background:transparent;border:0;border-radius:0;color:#b9c6bd;font-weight:600}
 .nav button:hover,.nav button.active{color:#f2f5f0;background:rgba(43,150,93,.10);box-shadow:inset 0 -3px var(--accent)}
 .nav button.secondary{border:0;background:transparent;color:#b9c6bd}
 .nav p{margin:0 0 0 8px}
@@ -67,18 +64,18 @@ main{max-width:1120px;margin:0 auto;padding:36px 22px 24px}
 .panel-intro{font-size:14px;color:var(--muted);line-height:1.6;margin:0 0 22px}
 label{display:block;color:#d2ddd5;font:11px var(--mono);letter-spacing:1.5px;text-transform:uppercase;margin:14px 0 6px}
 input,select,textarea{
-  width:100%;padding:13px 14px;border-radius:2px;border:1px solid var(--line2);
-  background:#08130c;color:var(--text);outline:none;transition:border-color .2s,background .2s
+width:100%;padding:13px 14px;border-radius:3px;border:1px solid var(--line2);
+background:#08130c;color:var(--text);outline:none;transition:border-color .2s
 }
-input:focus,select:focus,textarea:focus{border-color:var(--accent2);background:#0b1910}
+input:focus,select:focus,textarea:focus{border-color:var(--accent2)}
 input::placeholder,textarea::placeholder{color:#718477}
 textarea{min-height:130px;resize:vertical;line-height:1.6}
 .row{display:flex;gap:13px}
 .row>*{flex:1;min-width:0}
 button{
-  border:1px solid var(--accent);border-radius:2px;background:var(--accent);
-  color:#041109;padding:12px 17px;font:500 12px var(--mono);letter-spacing:1px;
-  text-transform:uppercase;transition:background .2s,border-color .2s,transform .2s
+border:1px solid var(--accent);border-radius:3px;background:var(--accent);
+color:#041109;padding:12px 17px;font:500 12px var(--mono);letter-spacing:1px;
+text-transform:uppercase;transition:background .2s,border-color .2s,transform .2s
 }
 button:hover{background:var(--accent2);border-color:var(--accent2);transform:translateY(-1px)}
 button.secondary{background:transparent;border:1px solid var(--line2);color:#d2ddd5}
@@ -87,7 +84,7 @@ button:disabled{opacity:.55;cursor:not-allowed;transform:none}
 .hidden{display:none!important}
 .voice{display:flex;gap:8px;flex-wrap:wrap;margin:9px 0 18px}
 .voice button{font-size:10px;padding:10px 12px}
-.result{white-space:pre-wrap;line-height:1.75;background:#08130c;border:1px solid var(--line);padding:18px;border-radius:2px;margin-top:15px;min-height:90px;color:#dce8df}
+.result{white-space:pre-wrap;line-height:1.75;background:#08130c;border:1px solid var(--line);padding:18px;border-radius:3px;margin-top:15px;min-height:90px;color:#dce8df}
 .action-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
 .tile{padding:17px;border:1px solid var(--line);background:var(--panel2);margin:9px 0}
 .small{font:11px/1.6 var(--mono);color:var(--soft)}
@@ -108,301 +105,564 @@ button:disabled{opacity:.55;cursor:not-allowed;transform:none}
 #authMsg{min-height:18px}
 .page{animation:appear .25s ease}
 @keyframes appear{from{opacity:.5;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+
+/* AI STUDY PLANNER */
+.planner-hero{
+padding:19px;border:1px solid var(--line);
+background:linear-gradient(120deg,#10291a,#0b1910);
+margin:15px 0 20px
+}
+.planner-hero strong{font:500 24px var(--mono);color:var(--accent2)}
+.planner-hero p{color:var(--muted);line-height:1.6;margin-bottom:0}
+.planner-form{padding:18px;border:1px solid var(--line);background:#09150e;margin-bottom:20px}
+.subject-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
+.subject-option{
+display:flex;align-items:center;gap:8px;padding:10px;
+border:1px solid var(--line);background:#0b1910;color:#dce8df;
+font-size:12px;min-width:0
+}
+.subject-option input{width:auto;margin:0;accent-color:var(--accent2)}
+.planner-day{border:1px solid var(--line);background:#0a1710;margin:12px 0;padding:15px}
+.planner-day h3{margin:0;color:var(--accent2);font:500 14px var(--mono);letter-spacing:1px}
+.day-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.task{
+display:grid;grid-template-columns:25px 1fr 1fr;gap:9px;
+align-items:center;padding:12px 0;border-bottom:1px solid var(--line)
+}
+.task:last-child{border-bottom:0}
+.task input[type=checkbox]{width:18px;height:18px;accent-color:var(--accent2)}
+.task input[type=text],.task input[type=number]{padding:9px;font-size:12px}
+.task .task-details{grid-column:2/4;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.task.done .task-details input{text-decoration:line-through;opacity:.65}
+.planner-summary{display:flex;gap:10px;flex-wrap:wrap;margin:15px 0}
+.planner-summary .tile{flex:1;min-width:120px;margin:0}
+.planner-summary strong{display:block;color:var(--accent2);font:20px var(--mono)}
+.planner-actions{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}
+.planner-status{min-height:20px;margin:10px 0}
 @media(max-width:700px){
-  header{padding:13px 17px}
-  main{padding:25px 17px 18px}
-  .hero{padding-top:5px}
-  .hero h1{font-size:58px}
-  .stats{gap:35px}
-  .briefing{font-size:12px;padding:13px 15px}
-  .nav{gap:2px}
-  .nav .tile{width:100%;margin-bottom:7px}
-  .nav button{padding:10px 11px;font-size:10px}
-  .nav p{width:100%;margin:7px 5px 0}
-  .panel{padding:17px}
-  .row{display:block}
-  .row>*{width:100%}
-  .page h2,.auth-title{font-size:35px}
+header{padding:13px 17px}
+main{padding:25px 17px 18px}
+.hero{padding-top:5px}
+.hero h1{font-size:58px}
+.stats{gap:35px}
+.briefing{font-size:12px;padding:13px 15px}
+.nav{gap:2px}
+.nav .tile{width:100%;margin-bottom:7px}
+.nav button{padding:10px 9px;font-size:10px}
+.nav p{width:100%;margin:7px 5px 0}
+.panel{padding:17px}
+.row{display:block}
+.row>*{width:100%}
+.page h2,.auth-title{font-size:35px}
+.subject-options{grid-template-columns:repeat(2,minmax(0,1fr))}
+.task{grid-template-columns:23px 1fr}
+.task .task-details{grid-column:2;grid-template-columns:1fr}
 }
 @media(min-width:900px){main{padding-top:44px}.panel{padding:27px}}
 </style>
 </head>
-
 <body>
 <header>
-  <div class="brand"><span class="brand-mark">✳</span>StudyBuddy <span>AI</span></div>
-  <div id="who">YOUR LEARNING COMPANION</div>
+<div class="brand"><span class="brand-mark">✳</span>StudyBuddy <span>AI</span></div>
+<div id="who">YOUR LEARNING COMPANION</div>
 </header>
 
 <main>
 <section class="hero">
-  <p class="eyebrow">• OPERATION LEARNING · EST. 2026</p>
-  <h1>StudyBuddy <span>AI</span></h1>
-  <p class="hero-copy">Every doubt deserves a clear answer. Learn step by step, with photo and voice support.</p>
-  <div class="stats">
-    <div class="stat"><strong>AI</strong><span>YOUR STUDY PARTNER</span></div>
-    <div class="stat"><strong>24/7</strong><span>READY TO HELP</span></div>
-  </div>
-  <div class="briefing"><b>Briefing note:</b> Your personal learning companion for classes 6 to 12 and college. Ask questions, explore concepts and learn at your own pace.</div>
+<p class="eyebrow">• OPERATION LEARNING · EST. 2026</p>
+<h1>StudyBuddy <span>AI</span></h1>
+<p class="hero-copy">Every doubt deserves a clear answer. Learn step by step, with photo and voice support.</p>
+<div class="stats">
+<div class="stat"><strong>AI</strong><span>YOUR STUDY PARTNER</span></div>
+<div class="stat"><strong>24/7</strong><span>READY TO HELP</span></div>
+</div>
+<div class="briefing"><b>Briefing note:</b> Your personal learning companion for classes 6 to 12 and college. Ask questions, explore concepts and learn at your own pace.</div>
 </section>
 
 <section id="auth" class="panel">
-  <div class="auth-head">
-    <p class="section-kicker">STUDENT ACCESS · WELCOME</p>
-    <h2 class="auth-title">Enter your Study Room</h2>
-    <p class="panel-intro">Sign in or create your student account to continue learning.</p>
-  </div>
-  <div class="auth-actions">
-    <button id="loginTab">Sign in</button>
-    <button id="registerTab" class="secondary">Create account</button>
-  </div>
-  <div id="nameWrap" class="hidden">
-    <label>Your name</label>
-    <input id="name" placeholder="Your name" autocomplete="name">
-  </div>
-  <label>Email address</label>
-  <input id="email" type="email" placeholder="you@example.com" autocomplete="email">
-  <label>Password · minimum 8 characters</label>
-  <div class="password-wrap">
-    <input id="password" type="password" placeholder="Password" minlength="8" autocomplete="current-password" required>
-    <button type="button" id="togglePassword" class="toggle-password" aria-label="Show password" title="Show password">👁</button>
-  </div>
-  <button id="authSubmit" type="button">Sign in →</button>
-  <p id="authMsg" class="small"></p>
+<div class="auth-head">
+<p class="section-kicker">STUDENT ACCESS · WELCOME</p>
+<h2 class="auth-title">Enter your Study Room</h2>
+<p class="panel-intro">Sign in or create your student account to continue learning.</p>
+</div>
+<div class="auth-actions">
+<button id="loginTab">Sign in</button>
+<button id="registerTab" class="secondary">Create account</button>
+</div>
+<div id="nameWrap" class="hidden">
+<label>Your name</label><input id="name" placeholder="Your name" autocomplete="name">
+</div>
+<label>Email address</label>
+<input id="email" type="email" placeholder="you@example.com" autocomplete="email">
+<label>Password · minimum 8 characters</label>
+<div class="password-wrap">
+<input id="password" type="password" placeholder="Password" minlength="8" autocomplete="current-password" required>
+<button type="button" id="togglePassword" class="toggle-password" aria-label="Show password" title="Show password">👁</button>
+</div>
+<button id="authSubmit" type="button">Sign in →</button>
+<p id="authMsg" class="small"></p>
 </section>
 
 <div id="app" class="layout hidden">
-  <aside class="panel nav">
-    <div class="tile"><b id="userName">Student</b><div id="planLabel" class="small">FREE PLAN</div></div>
-    <button data-page="solver" class="active">✳ Solve a doubt</button>
-    <button data-page="history">My history</button>
-    <button data-page="plans">Learning plans</button>
-    <button data-page="admin" id="adminNav" class="hidden">Admin dashboard</button>
-    <button id="logout" class="secondary">Sign out ↗</button>
-    <p class="small">CREATED BY PRINCE KUMAR</p>
-  </aside>
+<aside class="panel nav">
+<div class="tile"><b id="userName">Student</b><div id="planLabel" class="small">FREE PLAN</div></div>
+<button data-page="solver" class="active">✳ Solve a doubt</button>
+<button data-page="planner">✦ AI Study Planner</button>
+<button data-page="history">My history</button>
+<button data-page="plans">Learning plans</button>
+<button data-page="admin" id="adminNav" class="hidden">Admin dashboard</button>
+<button id="logout" class="secondary">Sign out ↗</button>
+<p class="small">CREATED BY PRINCE KUMAR</p>
+</aside>
 
-  <section class="panel">
-    <div id="solver" class="page">
-      <p class="section-kicker">ASK · UNDERSTAND · LEARN</p>
-      <h2>AI Doubt Solver</h2>
-      <p class="panel-intro">Share a question in text or upload a photo. Your AI tutor will explain it step by step.</p>
-      <div class="row">
-        <div><label>Subject</label><select id="subject">
-          <option>General</option><option>Mathematics</option><option>Physics</option><option>Chemistry</option><option>Biology</option><option>English</option><option>History</option><option>Geography</option><option>Computer Science</option><option>Other</option>
-        </select></div>
-        <div><label>Learning level</label><select id="level">
-          <option>School</option><option>Class 6–8</option><option>Class 9–10</option><option>Class 11–12</option><option>JEE Main</option><option>JEE Advanced</option><option>NEET</option><option>College</option>
-        </select></div>
-        <div><label>Language</label><select id="language"><option>English</option><option>Hindi</option><option>Hinglish</option></select></div>
-      </div>
-      <label>Your question</label>
-      <textarea id="question" placeholder="Type your question here, or use the microphone to dictate..."></textarea>
-      <div class="voice">
-        <button id="mic" class="secondary">🎙 Dictate question</button>
-        <button id="speak" class="secondary">🔊 Read answer</button>
-        <button id="stopSpeak" class="secondary">⏹ Stop voice</button>
-      </div>
-      <label>Attach a question photo · max 8 MB</label>
-      <input id="image" type="file" accept="image/*">
-      <div class="action-row">
-        <button id="solve">Solve my doubt →</button>
-        <span id="solveMsg" class="small"></span>
-      </div>
-      <div id="result" class="result muted">Your step-by-step explanation will appear here.</div>
-      <div class="action-row">
-        <button class="secondary" id="practice">Create practice questions</button>
-        <button class="secondary" id="quiz">Start a quiz</button>
-      </div>
-    </div>
-
-    <div id="history" class="page hidden">
-      <p class="section-kicker">YOUR LEARNING RECORD</p><h2>My doubt history</h2>
-      <p class="panel-intro">Your latest 50 solved doubts are saved to your account.</p>
-      <div id="historyList"></div>
-    </div>
-
-    <div id="plans" class="page hidden">
-      <p class="section-kicker">LEARN AT YOUR PACE</p><h2>Learning plans</h2>
-      <p class="panel-intro">Plan information for StudyBuddy AI.</p>
-      <div class="row">
-        <div class="tile"><p class="section-kicker">START HERE</p><h3>Free</h3><div class="price">₹0</div><p class="muted">Basic doubt solving and chat history.</p><span class="badge">AVAILABLE</span></div>
-        <div class="tile"><p class="section-kicker">MORE TO EXPLORE</p><h3>Premium</h3><div class="price">Coming soon</div><p class="muted">Proposed future benefits: higher usage limits, priority access and advanced learning tools.</p><span class="badge">NOT YET FOR SALE</span></div>
-      </div>
-      <p class="small">No payment is collected by this demo. An adult account owner should configure any future payment provider and terms.</p>
-    </div>
-
-    <div id="admin" class="page hidden">
-      <p class="section-kicker">CONTROL ROOM</p><h2>Admin dashboard</h2>
-      <div id="adminStats" class="tile">Loading admin data…</div><div id="adminUsers"></div>
-    </div>
-  </section>
+<section class="panel">
+<div id="solver" class="page">
+<p class="section-kicker">ASK · UNDERSTAND · LEARN</p>
+<h2>AI Doubt Solver</h2>
+<p class="panel-intro">Share a question in text or upload a photo. Your AI tutor will explain it step by step.</p>
+<div class="row">
+<div><label>Subject</label><select id="subject">
+<option>General</option><option>Mathematics</option><option>Physics</option><option>Chemistry</option><option>Biology</option><option>English</option><option>History</option><option>Geography</option><option>Computer Science</option><option>Other</option>
+</select></div>
+<div><label>Learning level</label><select id="level">
+<option>School</option><option>Class 6–8</option><option>Class 9–10</option><option>Class 11–12</option><option>JEE Main</option><option>JEE Advanced</option><option>NEET</option><option>College</option>
+</select></div>
+<div><label>Language</label><select id="language"><option>English</option><option>Hindi</option><option>Hinglish</option></select></div>
+</div>
+<label>Your question</label>
+<textarea id="question" placeholder="Type your question here, or use the microphone to dictate..."></textarea>
+<div class="voice">
+<button id="mic" class="secondary">🎙 Dictate question</button>
+<button id="speak" class="secondary">🔊 Read answer</button>
+<button id="stopSpeak" class="secondary">⏹ Stop voice</button>
+</div>
+<label>Attach a question photo · max 8 MB</label>
+<input id="image" type="file" accept="image/*">
+<div class="action-row"><button id="solve">Solve my doubt →</button><span id="solveMsg" class="small"></span></div>
+<div id="result" class="result muted">Your step-by-step explanation will appear here.</div>
+<div class="action-row">
+<button class="secondary" id="practice">Create practice questions</button>
+<button class="secondary" id="quiz">Start a quiz</button>
+</div>
 </div>
 
+<!-- AI STUDY PLANNER -->
+<div id="planner" class="page hidden">
+<p class="section-kicker">PLAN · FOCUS · ACHIEVE</p>
+<h2>AI Study Planner</h2>
+<p class="panel-intro">Create a personalized 7-day study timetable with AI. Track your progress and adjust your tasks.</p>
+<div class="planner-hero">
+<strong>✦ Your week. Your goals.</strong>
+<p>Build a practical study routine for school, college or exam preparation. Your saved plan stays linked to your account.</p>
+</div>
+<div class="planner-form">
+<p class="section-kicker">PERSONALIZE YOUR PLAN</p>
+<label>Learning level</label>
+<select id="plannerLevel">
+<option>Class 6</option><option>Class 7</option><option>Class 8</option><option>Class 9</option><option>Class 10</option><option>Class 11</option><option>Class 12</option><option>College</option><option>JEE Main</option><option>JEE Advanced</option><option>NEET</option><option>Other</option>
+</select>
+<label>Subjects to study</label>
+<div class="subject-options" id="plannerSubjects">
+<label class="subject-option"><input type="checkbox" value="Mathematics" checked> Mathematics</label>
+<label class="subject-option"><input type="checkbox" value="Physics"> Physics</label>
+<label class="subject-option"><input type="checkbox" value="Chemistry"> Chemistry</label>
+<label class="subject-option"><input type="checkbox" value="Biology"> Biology</label>
+<label class="subject-option"><input type="checkbox" value="English"> English</label>
+<label class="subject-option"><input type="checkbox" value="Computer Science"> Computer Science</label>
+<label class="subject-option"><input type="checkbox" value="History"> History</label>
+<label class="subject-option"><input type="checkbox" value="Geography"> Geography</label>
+<label class="subject-option"><input type="checkbox" value="General Studies"> General Studies</label>
+</div>
+<div class="row">
+<div><label>Daily study hours</label><input id="plannerHours" type="number" min="1" max="12" value="3"></div>
+<div><label>Exam date (optional)</label><input id="plannerExamDate" type="date"></div>
+</div>
+<label>Plan language</label>
+<select id="plannerLanguage"><option>Hindi</option><option>English</option><option>Hinglish</option></select>
+<div class="planner-actions">
+<button id="generatePlan">✦ Generate my plan</button>
+<button id="loadPlan" class="secondary">Load saved plan</button>
+</div>
+<p id="plannerStatus" class="small planner-status"></p>
+</div>
+<div id="plannerOutput"></div>
+</div>
+
+<div id="history" class="page hidden">
+<p class="section-kicker">YOUR LEARNING RECORD</p><h2>My doubt history</h2>
+<p class="panel-intro">Your latest 50 solved doubts are saved to your account.</p>
+<div id="historyList"></div>
+</div>
+
+<div id="plans" class="page hidden">
+<p class="section-kicker">LEARN AT YOUR PACE</p><h2>Learning plans</h2>
+<p class="panel-intro">Plan information for StudyBuddy AI.</p>
+<div class="row">
+<div class="tile"><p class="section-kicker">START HERE</p><h3>Free</h3><div class="price">₹0</div><p class="muted">Basic doubt solving and chat history.</p><span class="badge">AVAILABLE</span></div>
+<div class="tile"><p class="section-kicker">MORE TO EXPLORE</p><h3>Premium</h3><div class="price">Coming soon</div><p class="muted">Proposed future benefits: higher usage limits, priority access and advanced learning tools.</p><span class="badge">NOT YET FOR SALE</span></div>
+</div>
+<p class="small">No payment is collected by this demo. An adult account owner should configure any future payment provider and terms.</p>
+</div>
+
+<div id="admin" class="page hidden">
+<p class="section-kicker">CONTROL ROOM</p><h2>Admin dashboard</h2>
+<div id="adminStats" class="tile">Loading admin data…</div><div id="adminUsers"></div>
+</div>
+</section>
+</div>
 <p class="credit">© 2026 STUDYBUDDY AI · CREATED BY PRINCE KUMAR</p>
 </main>
 
 <script>
 let token=localStorage.getItem("sb_token"),currentUser=null,mode="login",recognition=null;
+let currentStudyPlan=null;
 const $=id=>document.getElementById(id);
 
 async function api(path,opts={}){
-  opts.headers={...(opts.headers||{}),...(token?{Authorization:"Bearer "+token}:{})};
-  return fetch(path,opts);
+opts.headers={...(opts.headers||{}),...(token?{Authorization:"Bearer "+token}:{})};
+return fetch(path,opts);
+}
+
+async function readResponse(r){
+const d=await r.json().catch(()=>({error:"Server returned an invalid response."}));
+if(!r.ok)throw Error(d.error||"Request failed.");
+return d;
 }
 
 function showPage(p){
-  document.querySelectorAll(".page").forEach(x=>x.classList.add("hidden"));
-  $(p).classList.remove("hidden");
-  document.querySelectorAll("[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===p));
-  if(p==="history")loadHistory();
-  if(p==="admin")loadAdmin();
+document.querySelectorAll(".page").forEach(x=>x.classList.add("hidden"));
+$(p).classList.remove("hidden");
+document.querySelectorAll("[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===p));
+if(p==="history")loadHistory();
+if(p==="admin")loadAdmin();
+if(p==="planner")loadStudyPlan();
 }
 
 function setMode(m){
-  mode=m;
-  $("nameWrap").classList.toggle("hidden",m!=="register");
-  $("authSubmit").textContent=m==="login"?"Sign in →":"Create account →";
-  $("loginTab").className=m==="login"?"":"secondary";
-  $("registerTab").className=m==="register"?"":"secondary";
-  $("password").autocomplete=m==="login"?"current-password":"new-password";
+mode=m;
+$("nameWrap").classList.toggle("hidden",m!=="register");
+$("authSubmit").textContent=m==="login"?"Sign in →":"Create account →";
+$("loginTab").className=m==="login"?"":"secondary";
+$("registerTab").className=m==="register"?"":"secondary";
+$("password").autocomplete=m==="login"?"current-password":"new-password";
 }
 $("loginTab").onclick=()=>setMode("login");
 $("registerTab").onclick=()=>setMode("register");
 
 $("togglePassword").onclick=()=>{
-  const field=$("password"),btn=$("togglePassword");
-  const showing=field.type==="password";
-  field.type=showing?"text":"password";
-  btn.textContent=showing?"🙈":"👁";
-  btn.setAttribute("aria-label",showing?"Hide password":"Show password");
-  btn.title=showing?"Hide password":"Show password";
+const field=$("password"),btn=$("togglePassword");
+const showing=field.type==="password";
+field.type=showing?"text":"password";
+btn.textContent=showing?"🙈":"👁";
+btn.setAttribute("aria-label",showing?"Hide password":"Show password");
+btn.title=showing?"Hide password":"Show password";
 };
 
 $("authSubmit").onclick=async()=>{
-  $("authSubmit").disabled=true;
-  $("authMsg").textContent="Please wait…";
-  try{
-    const r=await fetch("/api/"+(mode==="login"?"login":"register"),{
-      method:"POST",headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({name:$("name").value,email:$("email").value,password:$("password").value})
-    });
-    const d=await r.json();
-    if(!r.ok)throw Error(d.error||"Unable to sign in.");
-    token=d.token;localStorage.setItem("sb_token",token);
-    await boot();
-  }catch(e){$("authMsg").textContent=e.message;}
-  finally{$("authSubmit").disabled=false;}
+$("authSubmit").disabled=true;
+$("authMsg").textContent="Please wait…";
+try{
+const r=await fetch("/api/"+(mode==="login"?"login":"register"),{
+method:"POST",headers:{"Content-Type":"application/json"},
+body:JSON.stringify({name:$("name").value,email:$("email").value,password:$("password").value})
+});
+const d=await readResponse(r);
+token=d.token;localStorage.setItem("sb_token",token);
+await boot();
+}catch(e){$("authMsg").textContent=e.message;}
+finally{$("authSubmit").disabled=false;}
 };
 
 async function boot(){
-  if(!token)return;
-  try{
-    const r=await api("/api/me");
-    if(!r.ok)throw Error("Session expired");
-    const d=await r.json();currentUser=d.user;
-    $("auth").classList.add("hidden");$("app").classList.remove("hidden");
-    $("userName").textContent=d.user.name;
-    $("who").textContent=d.user.email;
-    $("planLabel").textContent=d.user.plan.toUpperCase()+" · "+d.user.role.toUpperCase();
-    $("adminNav").classList.toggle("hidden",d.user.role!=="admin");
-    showPage("solver");
-  }catch{
-    token=null;localStorage.removeItem("sb_token");
-    $("auth").classList.remove("hidden");$("app").classList.add("hidden");
-  }
+if(!token)return;
+try{
+const r=await api("/api/me");
+const d=await readResponse(r);
+currentUser=d.user;
+$("auth").classList.add("hidden");$("app").classList.remove("hidden");
+$("userName").textContent=d.user.name;
+$("who").textContent=d.user.email;
+$("planLabel").textContent=d.user.plan.toUpperCase()+" · "+d.user.role.toUpperCase();
+$("adminNav").classList.toggle("hidden",d.user.role!=="admin");
+showPage("solver");
+}catch{
+token=null;localStorage.removeItem("sb_token");
+$("auth").classList.remove("hidden");$("app").classList.add("hidden");
+}
 }
 
 document.querySelectorAll("[data-page]").forEach(b=>b.onclick=()=>showPage(b.dataset.page));
 $("logout").onclick=()=>{token=null;localStorage.removeItem("sb_token");location.reload();};
 
 $("solve").onclick=async()=>{
-  const q=$("question").value.trim(),f=$("image").files[0];
-  if(!q&&!f){$("solveMsg").textContent="Type a question or attach a photo.";return;}
-  if(f&&f.size>8*1024*1024){$("solveMsg").textContent="Image must be under 8 MB.";return;}
-  const fd=new FormData();
-  fd.append("question",q);fd.append("subject",$("subject").value);
-  fd.append("level",$("level").value);fd.append("language",$("language").value);
-  if(f)fd.append("image",f);
-  $("solve").disabled=true;$("solveMsg").textContent="SOLVING…";
-  try{
-    const r=await api("/api/solve",{method:"POST",body:fd});
-    const d=await r.json();if(!r.ok)throw Error(d.error||"Could not solve this question.");
-    $("result").textContent=d.answer;$("solveMsg").textContent="SAVED TO HISTORY";
-  }catch(e){$("result").textContent=e.message;$("solveMsg").textContent="";}
-  finally{$("solve").disabled=false;}
+const q=$("question").value.trim(),f=$("image").files[0];
+if(!q&&!f){$("solveMsg").textContent="Type a question or attach a photo.";return;}
+if(f&&f.size>8*1024*1024){$("solveMsg").textContent="Image must be under 8 MB.";return;}
+const fd=new FormData();
+fd.append("question",q);fd.append("subject",$("subject").value);
+fd.append("level",$("level").value);fd.append("language",$("language").value);
+if(f)fd.append("image",f);
+$("solve").disabled=true;$("solveMsg").textContent="SOLVING…";
+try{
+const r=await api("/api/solve",{method:"POST",body:fd});
+const d=await readResponse(r);
+$("result").textContent=d.answer;$("solveMsg").textContent="SAVED TO HISTORY";
+}catch(e){$("result").textContent=e.message;$("solveMsg").textContent="";}
+finally{$("solve").disabled=false;}
 };
 
 async function loadHistory(){
-  try{
-    const r=await api("/api/history"),d=await r.json();
-    if(!r.ok)throw Error(d.error||"Could not load history.");
-    $("historyList").innerHTML="";
-    (d.history||[]).forEach(x=>{
-      const el=document.createElement("div");el.className="history-item";
-      const q=document.createElement("b");q.textContent=x.question;
-      const a=document.createElement("p");a.className="small";
-      a.textContent=(x.answer||"").slice(0,260)+((x.answer||"").length>260?"…":"");
-      const del=document.createElement("button");del.className="secondary";del.textContent="Delete";
-      del.onclick=async()=>{await api("/api/history/"+x.id,{method:"DELETE"});loadHistory();};
-      el.append(q,a,del);$("historyList").append(el);
-    });
-    if(!(d.history||[]).length)$("historyList").textContent="No solved doubts yet. Start with your first question!";
-  }catch(e){$("historyList").textContent=e.message;}
+try{
+const r=await api("/api/history"),d=await readResponse(r);
+$("historyList").innerHTML="";
+(d.history||[]).forEach(x=>{
+const el=document.createElement("div");el.className="history-item";
+const q=document.createElement("b");q.textContent=x.question;
+const a=document.createElement("p");a.className="small";
+a.textContent=(x.answer||"").slice(0,260)+((x.answer||"").length>260?"…":"");
+const del=document.createElement("button");del.className="secondary";del.textContent="Delete";
+del.onclick=async()=>{await api("/api/history/"+x.id,{method:"DELETE"});loadHistory();};
+el.append(q,a,del);$("historyList").append(el);
+});
+if(!(d.history||[]).length)$("historyList").textContent="No solved doubts yet. Start with your first question!";
+}catch(e){$("historyList").textContent=e.message;}
 }
 
 $("practice").onclick=()=>{
-  $("question").value="Create 5 practice questions on the topic I am studying. Show answers only when I ask.";
-  $("question").focus();
+$("question").value="Create 5 practice questions on the topic I am studying. Show answers only when I ask.";
+$("question").focus();
 };
 $("quiz").onclick=()=>{
-  $("question").value="Start a 5-question quiz on this topic. Ask one question at a time and wait for my answer.";
-  $("question").focus();
+$("question").value="Start a 5-question quiz on this topic. Ask one question at a time and wait for my answer.";
+$("question").focus();
 };
 
 $("mic").onclick=()=>{
-  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-  if(!SR){$("solveMsg").textContent="Speech recognition isn't supported in this browser. Try Chrome.";return;}
-  recognition=new SR();
-  recognition.lang=$("language").value==="Hindi"?"hi-IN":"en-IN";
-  recognition.onresult=e=>{$("question").value+=($("question").value?" ":"")+e.results[0][0].transcript;};
-  recognition.onerror=()=>{$("solveMsg").textContent="Couldn't capture speech. Please try again.";};
-  recognition.onend=()=>{$("solveMsg").textContent="";};
-  recognition.start();$("solveMsg").textContent="LISTENING…";
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+if(!SR){$("solveMsg").textContent="Speech recognition isn't supported in this browser. Try Chrome.";return;}
+recognition=new SR();
+recognition.lang=$("language").value==="Hindi"?"hi-IN":"en-IN";
+recognition.onresult=e=>{$("question").value+=($("question").value?" ":"")+e.results[0][0].transcript;};
+recognition.onerror=()=>{$("solveMsg").textContent="Couldn't capture speech. Please try again.";};
+recognition.onend=()=>{$("solveMsg").textContent="";};
+recognition.start();$("solveMsg").textContent="LISTENING…";
 };
 
 $("speak").onclick=()=>{
-  if(!("speechSynthesis"in window)){$("solveMsg").textContent="Voice playback isn't supported in this browser.";return;}
-  speechSynthesis.cancel();
-  const u=new SpeechSynthesisUtterance($("result").textContent);
-  u.lang=$("language").value==="Hindi"?"hi-IN":"en-IN";speechSynthesis.speak(u);
+if(!("speechSynthesis"in window)){$("solveMsg").textContent="Voice playback isn't supported in this browser.";return;}
+speechSynthesis.cancel();
+const u=new SpeechSynthesisUtterance($("result").textContent);
+u.lang=$("language").value==="Hindi"?"hi-IN":"en-IN";speechSynthesis.speak(u);
 };
 $("stopSpeak").onclick=()=>{if("speechSynthesis"in window)speechSynthesis.cancel();};
 
-async function loadAdmin(){
-  try{
-    const r=await api("/api/admin/overview"),d=await r.json();
-    if(!r.ok){$("adminStats").textContent=d.error||"Unable to load admin data.";return;}
-    $("adminStats").textContent=`REGISTERED USERS: ${d.totalUsers} · DOUBTS SOLVED: ${d.totalDoubts}`;
-    $("adminUsers").innerHTML="";
-    (d.users||[]).forEach(u=>{
-      const row=document.createElement("div");row.className="history-item";
-      const info=document.createElement("span");info.textContent=`${u.name} · ${u.email} · ${u.role} · ${u.plan}`;
-      const sel=document.createElement("select");
-      sel.innerHTML='<option value="free">Free</option><option value="premium">Premium</option>';
-      sel.value=u.plan;
-      sel.onchange=async()=>{
-        const update=await api("/api/admin/users/"+u.id+"/plan",{
-          method:"PATCH",headers:{"Content-Type":"application/json"},
-          body:JSON.stringify({plan:sel.value})
-        });
-        if(!update.ok){sel.value=u.plan;return;}
-        loadAdmin();
-      };
-      row.append(info,sel);$("adminUsers").append(row);
-    });
-  }catch(e){$("adminStats").textContent=e.message;}
+/* STUDY PLANNER HELPERS */
+function unwrapPlan(data){
+const outer=data.plan;
+if(!outer)return null;
+return outer.plan||outer;
 }
+
+function setPlannerStatus(message){$("plannerStatus").textContent=message;}
+
+function renderStudyPlan(plan){
+currentStudyPlan=plan;
+const output=$("plannerOutput");
+output.replaceChildren();
+if(!plan||!Array.isArray(plan.days)){
+output.textContent="No saved study plan yet. Generate your first plan above.";
+return;
+}
+
+const title=document.createElement("h3");
+title.textContent=plan.title||"Your 7-Day Study Plan";
+output.append(title);
+
+const goal=document.createElement("p");
+goal.className="panel-intro";
+goal.textContent=plan.dailyGoal||"Follow your timetable and mark tasks complete as you progress.";
+output.append(goal);
+
+const summary=document.createElement("div");
+summary.className="planner-summary";
+const total=plan.days.reduce((n,d)=>n+(Array.isArray(d.tasks)?d.tasks.length:0),0);
+const completed=plan.days.reduce((n,d)=>n+(d.tasks||[]).filter(t=>t.completed).length,0);
+const totalBox=document.createElement("div");totalBox.className="tile";
+const totalNumber=document.createElement("strong");totalNumber.textContent=String(total);
+const totalLabel=document.createElement("span");totalLabel.className="small";totalLabel.textContent="TOTAL TASKS";
+totalBox.append(totalNumber,totalLabel);
+const doneBox=document.createElement("div");doneBox.className="tile";
+const doneNumber=document.createElement("strong");doneNumber.textContent=String(completed);
+const doneLabel=document.createElement("span");doneLabel.className="small";doneLabel.textContent="COMPLETED";
+doneBox.append(doneNumber,doneLabel);
+summary.append(totalBox,doneBox);
+output.append(summary);
+
+plan.days.forEach((day,dayIndex)=>{
+const section=document.createElement("section");
+section.className="planner-day";
+const head=document.createElement("div");head.className="day-head";
+const h=document.createElement("h3");h.textContent=day.day||("DAY "+(dayIndex+1));
+const count=document.createElement("span");count.className="small";
+count.textContent=(day.tasks||[]).length+" TASKS";
+head.append(h,count);section.append(head);
+
+(day.tasks||[]).forEach((task,taskIndex)=>{
+const item=document.createElement("div");
+item.className="task"+(task.completed?" done":"");
+const check=document.createElement("input");
+check.type="checkbox";check.checked=!!task.completed;
+check.setAttribute("aria-label","Mark task completed");
+check.onchange=()=>{
+task.completed=check.checked;
+item.classList.toggle("done",task.completed);
+updatePlannerProgress();
+};
+
+const details=document.createElement("div");details.className="task-details";
+const time=document.createElement("input");time.type="text";
+time.placeholder="Time";time.value=task.time||"";
+time.setAttribute("aria-label","Study time");
+time.onchange=()=>{task.time=time.value;};
+
+const subject=document.createElement("input");subject.type="text";
+subject.placeholder="Subject";subject.value=task.subject||"";
+subject.setAttribute("aria-label","Subject");
+subject.onchange=()=>{task.subject=subject.value;};
+
+const topic=document.createElement("input");topic.type="text";
+topic.placeholder="Topic or task";topic.value=task.topic||"";
+topic.setAttribute("aria-label","Topic or task");
+topic.onchange=()=>{task.topic=topic.value;};
+
+const duration=document.createElement("input");duration.type="number";
+duration.min="5";duration.max="600";duration.placeholder="Minutes";
+duration.value=Number(task.duration)||30;
+duration.setAttribute("aria-label","Duration in minutes");
+duration.onchange=()=>{task.duration=Math.max(5,Math.min(600,Number(duration.value)||30));duration.value=task.duration;};
+
+details.append(time,subject,topic,duration);
+item.append(check,details);
+section.append(item);
+});
+output.append(section);
+});
+
+const actions=document.createElement("div");actions.className="planner-actions";
+const save=document.createElement("button");save.textContent="Save my changes";
+save.onclick=saveStudyPlan;
+const regenerate=document.createElement("button");regenerate.textContent="Generate new plan";
+regenerate.className="secondary";
+regenerate.onclick=()=>{$("plannerOutput").scrollIntoView({behavior:"smooth"});$("plannerLevel").focus();};
+actions.append(save,regenerate);
+output.append(actions);
+}
+
+function updatePlannerProgress(){
+if(!currentStudyPlan)return;
+const completed=currentStudyPlan.days.reduce((n,d)=>n+(d.tasks||[]).filter(t=>t.completed).length,0);
+const total=currentStudyPlan.days.reduce((n,d)=>n+(d.tasks||[]).length,0);
+const boxes=$("plannerOutput").querySelectorAll(".planner-summary strong");
+if(boxes.length>=2)boxes[1].textContent=String(completed);
+if(boxes.length>=1)boxes[0].textContent=String(total);
+}
+
+async function loadStudyPlan(){
+setPlannerStatus("Loading your saved plan…");
+try{
+const r=await api("/api/study-planner");
+const d=await readResponse(r);
+const plan=unwrapPlan(d);
+if(plan){renderStudyPlan(plan);setPlannerStatus("Your saved study plan is ready.");}
+else{currentStudyPlan=null;$("plannerOutput").textContent="No saved plan yet. Choose your subjects and generate one!";setPlannerStatus("");}
+}catch(e){setPlannerStatus(e.message);}
+}
+
+$("generatePlan").onclick=async()=>{
+const subjects=[...$("plannerSubjects").querySelectorAll('input[type="checkbox"]:checked')].map(x=>x.value);
+const hours=Number($("plannerHours").value);
+if(!subjects.length){setPlannerStatus("Please select at least one subject.");return;}
+if(!Number.isInteger(hours)||hours<1||hours>12){setPlannerStatus("Enter daily study hours between 1 and 12.");return;}
+
+const body={
+subjects,
+hours,
+examDate:$("plannerExamDate").value,
+level:$("plannerLevel").value,
+language:$("plannerLanguage").value
+};
+$("generatePlan").disabled=true;
+setPlannerStatus("AI is preparing your personalized 7-day timetable…");
+try{
+const r=await api("/api/study-planner/generate",{
+method:"POST",headers:{"Content-Type":"application/json"},
+body:JSON.stringify(body)
+});
+const d=await readResponse(r);
+const plan=unwrapPlan(d);
+if(!plan)throw Error("The server did not return a study plan.");
+renderStudyPlan(plan);
+setPlannerStatus("Your study plan has been generated and saved!");
+}catch(e){setPlannerStatus(e.message);}
+finally{$("generatePlan").disabled=false;}
+};
+
+async function saveStudyPlan(){
+if(!currentStudyPlan)return;
+const saveButton=[...$("plannerOutput").querySelectorAll("button")].find(b=>b.textContent==="Save my changes");
+if(saveButton)saveButton.disabled=true;
+setPlannerStatus("Saving your timetable…");
+try{
+let r;
+if(currentStudyPlan.id){
+r=await api("/api/study-planner/"+currentStudyPlan.id,{
+method:"PATCH",headers:{"Content-Type":"application/json"},
+body:JSON.stringify({plan:currentStudyPlan})
+});
+}else{
+r=await api("/api/study-planner/save",{
+method:"POST",headers:{"Content-Type":"application/json"},
+body:JSON.stringify({plan:currentStudyPlan})
+});
+}
+const d=await readResponse(r);
+const saved=unwrapPlan(d);
+if(saved)currentStudyPlan=saved;
+setPlannerStatus("Study plan saved successfully!");
+renderStudyPlan(currentStudyPlan);
+}catch(e){setPlannerStatus(e.message);}
+finally{
+const btn=[...$("plannerOutput").querySelectorAll("button")].find(b=>b.textContent==="Save my changes");
+if(btn)btn.disabled=false;
+}
+}
+
+$("loadPlan").onclick=loadStudyPlan;
+
+async function loadAdmin(){
+try{
+const r=await api("/api/admin/overview"),d=await readResponse(r);
+$("adminStats").textContent=`REGISTERED USERS: ${d.totalUsers} · DOUBTS SOLVED: ${d.totalDoubts}`;
+$("adminUsers").innerHTML="";
+(d.users||[]).forEach(u=>{
+const row=document.createElement("div");row.className="history-item";
+const info=document.createElement("span");info.textContent=`${u.name} · ${u.email} · ${u.role} · ${u.plan}`;
+const sel=document.createElement("select");
+sel.innerHTML='<option value="free">Free</option><option value="premium">Premium</option>';
+sel.value=u.plan;
+sel.onchange=async()=>{
+const update=await api("/api/admin/users/"+u.id+"/plan",{
+method:"PATCH",headers:{"Content-Type":"application/json"},
+body:JSON.stringify({plan:sel.value})
+});
+if(!update.ok){sel.value=u.plan;return;}
+loadAdmin();
+};
+row.append(info,sel);$("adminUsers").append(row);
+});
+}catch(e){$("adminStats").textContent=e.message;}
+}
+
 setMode("login");
 boot();
 </script>
